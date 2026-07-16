@@ -1,0 +1,66 @@
+<section id="iletisim" class="section reveal">
+  <div class="container contact-grid">
+    <div>
+      <h2>Birlikte çalışalım</h2>
+      <p>Kurumsal ölçekli bir ürün için frontend desteğine mi ihtiyacınız var, yoksa sadece merhaba mı demek istiyorsunuz — yazın.</p>
+      <ul class="contact-links">
+        <li><a href="mailto:mete@meteucar.com">mete@meteucar.com</a></li>
+        <li><a href="https://linkedin.com/in/meteucar" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/meteucar" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+
+    <form class="contact-form" id="contact-form" novalidate>
+      <div class="form-field">
+        <label for="name">İsim</label>
+        <input type="text" id="name" name="name" autocomplete="name" required />
+      </div>
+      <div class="form-field">
+        <label for="email">E-posta</label>
+        <input type="email" id="email" name="email" autocomplete="email" required />
+      </div>
+      <div class="form-field">
+        <label for="message">Mesaj</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        Gönder
+        <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<style is:global>
+  /* ---------- contact ---------- */
+  .contact-grid{display:grid;gap:48px;}
+  @media (min-width:860px){ .contact-grid{grid-template-columns:1fr 1.2fr;} }
+  .contact-grid h2{font-size:clamp(26px,3.4vw,36px);margin-top:2px;}
+  .contact-grid > div > p{color:var(--text-secondary);max-width:44ch;margin-top:16px;font-size:16px;line-height:1.65;}
+  .contact-links{margin-top:28px;display:flex;flex-direction:column;gap:14px;}
+  .contact-links a{font-size:15px;color:var(--text-primary);border-bottom:1px solid var(--border-strong);
+    display:inline-block;width:fit-content;padding-bottom:2px;transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease);}
+  .contact-links a:hover{color:var(--accent);border-color:var(--accent);}
+
+  .contact-form{display:flex;flex-direction:column;gap:20px;}
+  .form-field{display:flex;flex-direction:column;gap:8px;}
+  .form-field label{font-size:13.5px;color:var(--text-secondary);}
+  .form-field input,.form-field textarea{background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius-sm);padding:12px 14px;font-size:16px;color:var(--text-primary);
+    min-height:48px;transition:border-color var(--dur) var(--ease);}
+  .form-field textarea{min-height:120px;resize:vertical;}
+  .form-field input:focus,.form-field textarea:focus{border-color:var(--accent);outline:none;}
+  .contact-form .btn{align-self:flex-start;}
+  .form-status{font-size:13.5px;color:var(--text-secondary);min-height:20px;}
+</style>
+
+<script>
+  // contact form (prototype stub — no backend wired yet)
+  var form = document.getElementById('contact-form');
+  var status = document.getElementById('form-status');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    status.textContent = 'Bu bir prototip; form gönderimi bir backend’e bağlanınca aktif olacak.';
+  });
+</script>

@@ -1,0 +1,31 @@
+<section id="hakkimda" class="section has-glow reveal">
+  <div class="container">
+    <h2>Hakkımda</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>32Bit'te frontend developer olarak enterprise ölçekli sigorta ürünleri geliştiriyorum. İşimin çoğu, karmaşık iş kurallarını — prim hesaplamalarından çok adımlı başvuru akışlarına kadar — güvenilir, tip güvenli arayüzlere dönüştürmekten oluşuyor.</p>
+        <p>React ve TypeScript'i temel alıyor, React Hook Form ve Zod ile form mimarilerini uçtan uca kurguluyor, Material UI üzerinde kurumsal tasarım sistemlerine sadık kalarak üretim yapıyorum. Beni motive eden şey; hatanın maliyetinin yüksek olduğu sistemlerde sade ve öngörülebilir arayüzler kurabilmek.</p>
+      </div>
+      <ul class="about-facts">
+        <li><span class="fact-label">şirket</span><span class="fact-value">32Bit</span></li>
+        <li><span class="fact-label">rol</span><span class="fact-value">Frontend Developer</span></li>
+        <li><span class="fact-label">alan</span><span class="fact-value">Kurumsal sigorta ürünleri</span></li>
+        <li><span class="fact-label">konum</span><span class="fact-value">İstanbul, Türkiye</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* ---------- about ---------- */
+  .about-grid{display:grid;gap:48px;margin-top:28px;}
+  .about-text p{color:var(--text-secondary);max-width:62ch;font-size:16px;line-height:1.75;}
+  .about-text p + p{margin-top:18px;}
+  .about-facts{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-content:start;}
+  .about-facts li{border-top:1px solid var(--border);padding-top:12px;}
+  .fact-label{display:block;font-family:var(--font-mono);font-size:12px;color:var(--text-muted);margin-bottom:4px;}
+  .fact-value{display:block;font-size:15px;color:var(--text-primary);}
+  @media (min-width:860px){
+    .about-grid{grid-template-columns:1.4fr 1fr;}
+  }
+</style>

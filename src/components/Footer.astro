@@ -1,0 +1,22 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© 2026 Mete Uçar</p>
+    <nav aria-label="Footer navigasyon">
+      <ul>
+        <li><a href="#hakkimda">Hakkımda</a></li>
+        <li><a href="#yazilar">Yazılar</a></li>
+        <li><a href="#iletisim">İletişim</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<style is:global>
+  /* ---------- footer ---------- */
+  .site-footer{border-top:1px solid var(--border);padding-block:32px;}
+  .footer-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;}
+  .footer-inner p{color:var(--text-muted);font-size:13.5px;}
+  .footer-inner nav ul{display:flex;gap:20px;}
+  .footer-inner nav a{font-size:13.5px;color:var(--text-secondary);transition:color var(--dur) var(--ease);}
+  .footer-inner nav a:hover{color:var(--accent);}
+</style>

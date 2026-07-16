@@ -1,0 +1,42 @@
+<div class="stack-strip has-glow">
+  <div class="container">
+    <div class="stack-groups">
+      <div class="stack-group">
+        <span class="stack-group-label">core</span>
+        <ul class="tag-list">
+          <li>React</li>
+          <li>TypeScript</li>
+        </ul>
+      </div>
+      <div class="stack-group">
+        <span class="stack-group-label">form &amp; validasyon</span>
+        <ul class="tag-list">
+          <li>React Hook Form</li>
+          <li>Zod</li>
+        </ul>
+      </div>
+      <div class="stack-group">
+        <span class="stack-group-label">arayüz</span>
+        <ul class="tag-list">
+          <li>Material UI</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  /* ---------- stack strip ---------- */
+  .stack-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding-block:36px;}
+  .stack-groups{display:grid;grid-template-columns:1fr;gap:24px;}
+  .stack-group{display:flex;flex-direction:column;gap:12px;}
+  .stack-group-label{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10.5px;
+    color:var(--text-secondary);text-transform:uppercase;letter-spacing:.09em;}
+  .stack-group-label::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+  @media (min-width:640px){
+    .stack-groups{grid-template-columns:repeat(3,1fr);gap:0;}
+    .stack-group{padding-inline:28px;}
+    .stack-group:first-child{padding-left:0;}
+    .stack-group:not(:first-child){border-left:1px solid var(--border);}
+  }
+</style>

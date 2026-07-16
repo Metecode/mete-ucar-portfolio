@@ -1,0 +1,23 @@
+/* ---------- tokens ---------- */
+:root{
+  --bg:#0A0B0D;
+  --surface:#141619;
+  --surface-2:#191C21;
+  --border:#24272D;
+  --border-strong:#33363C;
+  --text-primary:#EDEEF0;
+  --text-secondary:#8B909A;
+  --text-muted:#5B5F68;
+  --accent:#7C86FF;
+  --accent-hover:#939CFF;
+  --accent-on:#171A4D;
+  --font-display:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+  --radius-sm:4px;
+  --radius-md:8px;
+  --container:1120px;
+  --dur:220ms;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --ease-smooth:cubic-bezier(.16,1,.3,1);
+}
