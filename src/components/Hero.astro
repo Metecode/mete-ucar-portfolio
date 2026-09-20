@@ -4,15 +4,15 @@ import heroPhoto from '../assets/hero.jpg';
 ---
 
 <section id="hero" class="hero">
-  <span class="ghost-text" aria-hidden="true">FRONTEND</span>
+  <span class="ghost-text" aria-hidden="true">FULL-STACK</span>
   <div class="container hero-grid">
     <div class="hero-content">
       <h1>
         <span class="line"><span>Karmaşık iş kurallarını,</span></span>
-        <span class="line"><span>güvenilir arayüzlere</span></span>
+        <span class="line"><span>güvenilir sistemlere</span></span>
         <span class="line"><span>dönüştürüyorum.</span></span>
       </h1>
-      <p class="hero-sub hero-slide hero-slide-left" style="transition-delay:120ms;">32Bit bünyesinde kurumsal sigorta ürünleri için React, TypeScript ve tip güvenli form mimarileri üzerine çalışan bir frontend developer'ım.</p>
+      <p class="hero-sub hero-slide hero-slide-left" style="transition-delay:120ms;">32Bit bünyesinde kurumsal sigorta ürünleri geliştiren bir full-stack developer'ım; React ve TypeScript ile tip güvenli arayüzler, Java ve Spring Boot ile bunları besleyen servisler kuruyorum.</p>
       <div class="hero-actions hero-slide hero-slide-left" style="transition-delay:220ms;">
         <a href="#iletisim" class="btn btn-primary">
           İletişime geç
@@ -21,9 +21,9 @@ import heroPhoto from '../assets/hero.jpg';
         <a href="#ne-yapiyorum" class="btn btn-ghost">Ne yaptığımı gör</a>
       </div>
       <dl class="role-card hero-slide hero-slide-right" style="transition-delay:320ms;">
-        <div class="role-row"><dt>role</dt><dd>"Frontend developer"</dd></div>
+        <div class="role-row"><dt>role</dt><dd>"Full-stack developer"</dd></div>
         <div class="role-row"><dt>focus</dt><dd>"Enterprise systems"</dd></div>
-        <div class="role-row"><dt>stack</dt><dd>React · TypeScript · MUI · RHF · Zod</dd></div>
+        <div class="role-row"><dt>stack</dt><dd>React · TypeScript · Java · Spring Boot</dd></div>
       </dl>
     </div>
 
@@ -71,6 +71,8 @@ import heroPhoto from '../assets/hero.jpg';
   .hero-photo-layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
   .hero-photo-layer img{width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block;}
   .hero-photo-bw img{filter:grayscale(100%) contrast(1.02);}
+  /* acik temada siyah-beyaz katman hic gosterilmez; foto her zaman renkli */
+  [data-theme="light"] .hero-photo-bw{display:none;}
   .hero-photo-bw{
     mask-image:radial-gradient(circle 110px at var(--px,50%) var(--py,42%),transparent 0,transparent 68px,black 128px);
     -webkit-mask-image:radial-gradient(circle 110px at var(--px,50%) var(--py,42%),transparent 0,transparent 68px,black 128px);}

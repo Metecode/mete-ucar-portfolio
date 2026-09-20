@@ -1,20 +1,28 @@
+---
+const uniqueItems = [
+  'Full-Stack Developer',
+  'Enterprise Systems',
+  'Tip Güvenli Formlar',
+  'React · TypeScript',
+];
+
+// One copy of uniqueItems must render wider than the viewport, or the
+// -50% loop shows a blank gap on wide screens. 4x repeat covers ~3200px
+// of content per copy, safe for common desktop/ultrawide widths.
+const repeats = 4;
+const items = Array(repeats * 2).fill(uniqueItems).flat();
+---
+
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span class="marquee-item">Frontend Developer</span>
-    <span class="marquee-item">Enterprise Systems</span>
-    <span class="marquee-item">Tip Güvenli Formlar</span>
-    <span class="marquee-item">React · TypeScript</span>
-    <span class="marquee-item">Frontend Developer</span>
-    <span class="marquee-item">Enterprise Systems</span>
-    <span class="marquee-item">Tip Güvenli Formlar</span>
-    <span class="marquee-item">React · TypeScript</span>
+    {items.map((item) => <span class="marquee-item">{item}</span>)}
   </div>
 </div>
 
 <style is:global>
   /* ---------- marquee ---------- */
   .marquee{border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding-block:18px;}
-  .marquee-track{display:flex;width:max-content;animation:marquee-scroll 28s linear infinite;}
+  .marquee-track{display:flex;width:max-content;animation:marquee-scroll 196s linear infinite;}
   .marquee-item{font-family:var(--font-mono);font-size:12.5px;color:var(--text-muted);white-space:nowrap;
     padding-inline:22px;text-transform:uppercase;letter-spacing:.09em;position:relative;}
   .marquee-item::after{content:"•";color:var(--accent);position:absolute;right:-2px;top:0;}

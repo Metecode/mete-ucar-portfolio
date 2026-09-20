@@ -1,15 +1,29 @@
+---
+import { Image } from 'astro:assets';
+import fishing from '../assets/off-the-clock/fishing.jpeg';
+import hiking from '../assets/off-the-clock/hiking.jpeg';
+import paddleboard from '../assets/off-the-clock/paddleboard.jpeg';
+
+const photos = [
+  { src: fishing, alt: 'Gece balık tutarken' },
+  { src: hiking, alt: 'Dağ yürüyüşünde' },
+  { src: paddleboard, alt: 'Deniz üzerinde SUP yaparken' },
+];
+---
+
 <section id="off-the-clock" class="section section-alt">
   <div class="container">
     <h2 class="reveal-wipe">Off the clock</h2>
     <p class="section-intro">Ekrandan uzaklaştığımda vaktimi nasıl geçirdiğim.</p>
 
     <div class="photo-grid">
-      <figure class="photo-placeholder"><div class="photo-placeholder-inner"><figcaption>fotoğraf — [etiket]</figcaption></div></figure>
-      <figure class="photo-placeholder"><div class="photo-placeholder-inner"><figcaption>fotoğraf — [etiket]</figcaption></div></figure>
-      <figure class="photo-placeholder"><div class="photo-placeholder-inner"><figcaption>fotoğraf — [etiket]</figcaption></div></figure>
-      <figure class="photo-placeholder"><div class="photo-placeholder-inner"><figcaption>fotoğraf — [etiket]</figcaption></div></figure>
-      <figure class="photo-placeholder"><div class="photo-placeholder-inner"><figcaption>fotoğraf — [etiket]</figcaption></div></figure>
-      <figure class="photo-placeholder"><div class="photo-placeholder-inner"><figcaption>fotoğraf — [etiket]</figcaption></div></figure>
+      {photos.map((photo) => (
+        <figure class="photo-placeholder">
+          <div class="photo-placeholder-inner">
+            <Image src={photo.src} alt={photo.alt} width={750} height={1000} format="webp" loading="lazy" />
+          </div>
+        </figure>
+      ))}
     </div>
   </div>
 </section>
@@ -18,7 +32,7 @@
   /* ---------- off the clock ---------- */
   .photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px;align-items:start;}
   @media (min-width:640px){ .photo-grid{grid-template-columns:repeat(3,1fr);} }
-  .photo-placeholder{aspect-ratio:4/5;background:var(--surface);border:1px dashed var(--border-strong);
+  .photo-placeholder{aspect-ratio:4/5;background:var(--surface);border:1px solid var(--border-strong);
     border-radius:var(--radius-md);overflow:hidden;margin:0;transition:border-color var(--dur) var(--ease);}
   .photo-placeholder:hover{border-color:var(--accent);}
   .photo-placeholder:nth-child(3n+2){aspect-ratio:1/1;}
@@ -27,6 +41,4 @@
     transition:transform 520ms var(--ease);}
   .photo-placeholder:hover .photo-placeholder-inner{transform:scale(1.06);}
   .photo-placeholder-inner img{width:100%;height:100%;object-fit:cover;display:block;}
-  .photo-placeholder figcaption{font-family:var(--font-mono);font-size:11.5px;color:var(--text-muted);
-    text-align:center;padding:0 12px;}
 </style>

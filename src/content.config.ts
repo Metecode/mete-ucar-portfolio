@@ -3,27 +3,35 @@ import { glob } from 'astro/loaders';
 
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     filename: z.string(),
     description: z.string(),
     stack: z.array(z.string()),
-    linkText: z.string(),
-    linkUrl: z.string(),
-    badge: z.string().optional(),
+    link: z.string(),
+    linkLabel: z.string(),
+    demo: z.string().optional(),
+    repo: z.string().optional(),
+    badge: z.string().nullish(),
+    image: image().optional(),
+    imageFit: z.enum(['cover', 'contain']).default('cover'),
+    imageBg: z.string().optional(),
+    imagePosition: z.string().optional(),
     order: z.number(),
   }),
 });
 
-const writing = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/writing' }),
+const articles = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
   schema: z.object({
     title: z.string(),
-    summary: z.string(),
-    readingTime: z.number(),
-    url: z.string(),
+    excerpt: z.string(),
+    readingTime: z.string(),
+    date: z.coerce.date(),
+    link: z.string(),
+    featured: z.boolean(),
     order: z.number(),
   }),
 });
 
-export const collections = { projects, writing };
+export const collections = { projects, articles };

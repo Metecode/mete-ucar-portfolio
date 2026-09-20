@@ -1,5 +1,8 @@
 /* ---------- tokens ---------- */
-:root{
+/* Renk tokenleri temaya gore iki kez tanimlanir; data-theme <html>'de tutulur.
+   :root ve [data-theme="dark"] ayni ozgullukte oldugu icin light bloku sonra gelmeli. */
+:root,
+[data-theme="dark"]{
   --bg:#0A0B0D;
   --surface:#141619;
   --surface-2:#191C21;
@@ -11,13 +14,65 @@
   --accent:#7C86FF;
   --accent-hover:#939CFF;
   --accent-on:#171A4D;
+}
+
+/* zemin gri-krem; yuzeyler zeminden ACIK, boylece kartlar hafif yukselmis durur */
+[data-theme="light"]{
+  --bg:#F4F4F2;
+  --surface:#FBFBFA;
+  --surface-2:#FFFFFF;
+  --border:#E0E0DD;
+  --border-strong:#C8C8C4;
+  --text-primary:#1A1A18;
+  --text-secondary:#5C5C58;
+  --text-muted:#93938D;
+  --accent:#5A63E8;
+  --accent-hover:#4A53D4;
+  --accent-on:#FFFFFF;
+}
+
+/* temadan bagimsiz tokenler */
+:root{
   --font-display:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --font-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --font-mono:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
   --radius-sm:4px;
   --radius-md:8px;
   --container:1120px;
+  --header-h:76px;
+  --header-h-sm:60px;
   --dur:220ms;
   --ease:cubic-bezier(.2,.7,.2,1);
   --ease-smooth:cubic-bezier(.16,1,.3,1);
+}
+
+/* ---------- tema gecis animasyonu ---------- */
+/* Sadece renk ozellikleri anime edilir; "all" kullanilmaz, yoksa magnetic buton,
+   scroll reveal ve hover transformlari bozulur.
+   .theme-transitions-enabled ilk frame'den sonra JS ile eklenir: ilk boyamada
+   renkler solarak gelmez, sonraki toggle'lar yumusak gecer. */
+html.theme-transitions-enabled,
+html.theme-transitions-enabled body,
+html.theme-transitions-enabled .nav-links,
+html.theme-transitions-enabled .stack-strip,
+html.theme-transitions-enabled .marquee{
+  transition:background-color 400ms ease,border-color 400ms ease,color 400ms ease;
+}
+
+/* Asagidakilerin kendi transition'lari var; shorthand uzerine yazilacagi icin
+   mevcut hover/scroll gecisleri de birlikte yeniden tanimlanir. */
+html.theme-transitions-enabled .site-header{
+  transition:background-color 400ms ease,color 400ms ease,
+             border-color var(--dur) var(--ease);
+}
+html.theme-transitions-enabled .work-card,
+html.theme-transitions-enabled .project-card,
+html.theme-transitions-enabled .article-card{
+  transition:background-color 400ms ease,color 400ms ease,
+             border-color var(--dur) var(--ease),transform var(--dur) var(--ease);
+}
+html.theme-transitions-enabled .form-field input,
+html.theme-transitions-enabled .form-field textarea{
+  transition:background-color 400ms ease,color 400ms ease,
+             border-color var(--dur) var(--ease);
 }

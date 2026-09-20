@@ -7,14 +7,21 @@ interface Props {
 }
 
 const {
-  title = 'Mete Uçar — Frontend Developer',
-  description = "Mete Uçar — kurumsal sigorta ürünleri üzerine çalışan mid-level frontend developer. React, TypeScript, MUI, React Hook Form, Zod.",
+  title = 'Mete Uçar — Full-stack Developer',
+  description = "Mete Uçar — kurumsal sigorta ürünleri üzerine çalışan mid-level Full-stack developer. React, TypeScript, MUI, React Hook Form, Zod.",
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="tr">
 <head>
+<!-- Tema, sayfa boyanmadan once uygulanir; boylece tema flash'i olmaz.
+     is:inline: Astro bu script'i bundle'lamasin, head'de senkron kalsin. -->
+<script is:inline>
+  const stored = localStorage.getItem('theme');
+  const theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{title}</title>
@@ -52,7 +59,10 @@ const {
     updateOnScroll();
 
     // entrance animations on load (nav links etc. keyed off body.is-ready)
+    // tema renk gecisleri de ilk frame'den sonra acilir: ilk boyama flash'siz,
+    // sonraki toggle'lar 400ms yumusak gecisli olur
     requestAnimationFrame(function(){
+      document.documentElement.classList.add('theme-transitions-enabled');
       requestAnimationFrame(function(){
         document.body.classList.add('is-ready');
       });
@@ -103,15 +113,31 @@ const {
         card.style.setProperty('--my', (e.clientY - r.top) + 'px');
       });
 
-      // magnetic primary buttons
+      // magnetic primary buttons (jitter-free: measure from untransformed rect)
       document.querySelectorAll('.btn-primary').forEach(function(btn){
+        var raf = null;
         btn.addEventListener('pointermove', function(e){
-          var r = btn.getBoundingClientRect();
-          var relX = e.clientX - r.left - r.width / 2;
-          var relY = e.clientY - r.top - r.height / 2;
-          btn.style.transform = 'translate(' + (relX * 0.18) + 'px,' + (relY * 0.35) + 'px)';
+          if(raf) return;
+          raf = requestAnimationFrame(function(){
+            raf = null;
+            // temporarily clear transform to read the button's true resting rect
+            var prev = btn.style.transform;
+            btn.style.transform = 'none';
+            var r = btn.getBoundingClientRect();
+            btn.style.transform = prev;
+            var relX = e.clientX - r.left - r.width / 2;
+            var relY = e.clientY - r.top - r.height / 2;
+            // clamp so the button never moves far enough to escape the cursor
+            var maxX = r.width * 0.12, maxY = r.height * 0.18;
+            var tx = Math.max(-maxX, Math.min(maxX, relX * 0.12));
+            var ty = Math.max(-maxY, Math.min(maxY, relY * 0.18));
+            btn.style.transform = 'translate(' + tx + 'px,' + ty + 'px)';
+          });
         });
-        btn.addEventListener('pointerleave', function(){ btn.style.transform = ''; });
+        btn.addEventListener('pointerleave', function(){
+          if(raf){ cancelAnimationFrame(raf); raf = null; }
+          btn.style.transform = '';
+        });
       });
     }
   </script>

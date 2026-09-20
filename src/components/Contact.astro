@@ -2,15 +2,17 @@
   <div class="container contact-grid">
     <div>
       <h2>Birlikte çalışalım</h2>
-      <p>Kurumsal ölçekli bir ürün için frontend desteğine mi ihtiyacınız var, yoksa sadece merhaba mı demek istiyorsunuz — yazın.</p>
+      <p>Kurumsal ölçekli bir ürün için full-stack desteğine mi ihtiyacınız var, yoksa sadece merhaba mı demek istiyorsunuz — yazın.</p>
       <ul class="contact-links">
-        <li><a href="mailto:mete@meteucar.com">mete@meteucar.com</a></li>
-        <li><a href="https://linkedin.com/in/meteucar" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="https://github.com/meteucar" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="mailto:i.meteucar@gmail.com">i.meteucar@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/meteucar/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/Metecode" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
     </div>
 
-    <form class="contact-form" id="contact-form" novalidate>
+    <form class="contact-form" id="contact-form" action="https://formspree.io/f/moeveebz" method="POST" novalidate>
+      <!-- honeypot: botlar doldurur, Formspree bu alan doluysa gönderimi eler -->
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true" />
       <div class="form-field">
         <label for="name">İsim</label>
         <input type="text" id="name" name="name" autocomplete="name" required />
@@ -52,15 +54,62 @@
   .form-field textarea{min-height:120px;resize:vertical;}
   .form-field input:focus,.form-field textarea:focus{border-color:var(--accent);outline:none;}
   .contact-form .btn{align-self:flex-start;}
+  .contact-form .btn:disabled{opacity:.6;cursor:progress;}
+  /* gonderim basarili olunca alanlar gizlenir, sadece durum mesaji kalir */
+  .contact-form.is-sent > *:not(.form-status){display:none;}
   .form-status{font-size:13.5px;color:var(--text-secondary);min-height:20px;}
+  .form-status.is-success{color:var(--accent);}
+  .form-status.is-error{color:var(--text-secondary);}
 </style>
 
 <script>
-  // contact form (prototype stub — no backend wired yet)
+  // contact form -> Formspree (AJAX; sayfa yonlendirilmez)
   var form = document.getElementById('contact-form');
   var status = document.getElementById('form-status');
+  var submitBtn = form.querySelector('button[type="submit"]');
+  var submitMarkup = submitBtn.innerHTML;
+  var sending = false;
+
+  function setStatus(text, state){
+    status.textContent = text;
+    status.classList.toggle('is-success', state === 'success');
+    status.classList.toggle('is-error', state === 'error');
+  }
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    status.textContent = 'Bu bir prototip; form gönderimi bir backend’e bağlanınca aktif olacak.';
+    if(sending) return;
+
+    // form novalidate: dogrulamayi gonderim aninda kendimiz tetikliyoruz ki
+    // bos alanlar Formspree'ye gitmesin
+    if(!form.checkValidity()){
+      form.reportValidity();
+      return;
+    }
+
+    sending = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Gönderiliyor...';
+    setStatus('', null);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(res){
+      if(!res.ok) throw new Error(String(res.status));
+      form.reset();
+      form.classList.add('is-sent');
+      setStatus('Mesajın iletildi, teşekkürler.', 'success');
+    })
+    .catch(function(){
+      setStatus('Bir sorun oluştu, doğrudan i.meteucar@gmail.com üzerinden yazabilirsin.', 'error');
+    })
+    .finally(function(){
+      sending = false;
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = submitMarkup;
+    });
   });
 </script>

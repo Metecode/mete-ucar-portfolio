@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 
-const articles = (await getCollection('writing')).sort(
+const articles = (await getCollection('articles')).sort(
   (a, b) => a.data.order - b.data.order
 );
 ---
@@ -12,15 +12,20 @@ const articles = (await getCollection('writing')).sort(
       <div>
         <h2 class="reveal-wipe">Yazılar</h2>
       </div>
-      <a class="text-link" href="https://medium.com/@meteucar" target="_blank" rel="noopener">Medium'da tümünü gör →</a>
+      <a class="text-link" href="https://medium.com/@i.meteucar" target="_blank" rel="noopener">Medium'da tümünü gör →</a>
     </div>
 
     <div class="article-grid">
       {articles.map((article) => (
-        <a class="article-card" href={article.data.url} target="_blank" rel="noopener">
-          <p class="article-meta">{article.data.readingTime} dk okuma</p>
+        <a
+          class:list={['article-card', { 'is-featured': article.data.featured }]}
+          href={article.data.link}
+          target="_blank"
+          rel="noopener"
+        >
+          <p class="article-meta">{article.data.readingTime}</p>
           <h3>{article.data.title}</h3>
-          <p>{article.data.summary}</p>
+          <p>{article.data.excerpt}</p>
         </a>
       ))}
     </div>
@@ -42,7 +47,7 @@ const articles = (await getCollection('writing')).sort(
   .article-card h3{font-size:17px;margin-bottom:8px;font-weight:500;}
   .article-card p{color:var(--text-secondary);font-size:14px;line-height:1.6;}
   @media (min-width:768px){
-    .article-card:first-child{grid-column:1 / -1;padding:34px;border-left:2px solid var(--accent);}
-    .article-card:first-child h3{font-size:23px;}
+    .article-card.is-featured{grid-column:1 / -1;padding:34px;border-left:2px solid var(--accent);}
+    .article-card.is-featured h3{font-size:23px;}
   }
 </style>
