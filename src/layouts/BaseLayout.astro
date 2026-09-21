@@ -1,19 +1,34 @@
 ---
 import '../styles/global.css';
+import { getAbsoluteLocaleUrl } from 'astro:i18n';
+import { getLangFromUrl, stripLangFromPath, t, languages, type Lang } from '../i18n/ui';
 
 interface Props {
   title?: string;
   description?: string;
+  /** 404 gibi, diger dilde birebir karsiligi olmayan sayfalarda kapatilir. */
+  alternates?: boolean;
 }
 
+const lang = getLangFromUrl(Astro.url);
+
 const {
-  title = 'Mete Uçar — Full-stack Developer',
-  description = "Mete Uçar — kurumsal sigorta ürünleri üzerine çalışan mid-level Full-stack developer. React, TypeScript, MUI, React Hook Form, Zod.",
+  title = t('meta.title', lang),
+  description = t('meta.description', lang),
+  alternates = true,
 } = Astro.props;
+
+// Ayni sayfanin diger dildeki mutlak URL'leri. Yol, dil onegi soyulmus halinden
+// yeniden kurulur: "/" -> tr "/", en "/en/"; "/en/foo" -> tr "/foo", en "/en/foo".
+const path = stripLangFromPath(Astro.url);
+const localeUrls = (Object.keys(languages) as Lang[]).map((locale) => ({
+  locale,
+  href: getAbsoluteLocaleUrl(locale, path),
+}));
 ---
 
 <!doctype html>
-<html lang="tr">
+<html lang={lang}>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,6 +38,17 @@ const {
 <meta name="theme-color" content="#0A0B0D" />
 <title>{title}</title>
 <meta name="description" content={description} />
+
+<!-- SEO: TR ve EN surumleri birbirine baglanir; x-default TR koku. -->
+{alternates && (
+  <>
+    {localeUrls.map(({ locale, href }) => (
+      <link rel="alternate" hreflang={locale} href={href} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl('tr', path)} />
+    <link rel="canonical" href={getAbsoluteLocaleUrl(lang, path)} />
+  </>
+)}
 
 <!-- Tema, sayfa boyanmadan once uygulanir; boylece tema flash'i olmaz.
      is:inline: Astro bu script'i bundle'lamasin, head'de senkron kalsin.
@@ -49,7 +75,7 @@ const {
 
   <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
-  <a href="#main" class="skip-link">İçeriğe geç</a>
+  <a href="#main" class="skip-link">{t('a11y.skipLink', lang)}</a>
 
   <slot />
 

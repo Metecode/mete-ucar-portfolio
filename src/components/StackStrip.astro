@@ -1,33 +1,28 @@
+---
+import { getLangFromUrl, t } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+
+// Teknoloji adlari cevrilmez; yalnizca grup etiketleri sozlukten gelir.
+const groups = [
+  { label: 'stack.core.label', items: ['React', 'TypeScript'] },
+  { label: 'stack.forms.label', items: ['React Hook Form', 'Zod'] },
+  { label: 'stack.ui.label', items: ['Material UI'] },
+  { label: 'stack.backend.label', items: ['Java', 'Spring Boot'] },
+] as const;
+---
+
 <div class="stack-strip has-glow">
   <div class="container">
     <div class="stack-groups">
-      <div class="stack-group">
-        <span class="stack-group-label">core</span>
-        <ul class="tag-list">
-          <li>React</li>
-          <li>TypeScript</li>
-        </ul>
-      </div>
-      <div class="stack-group">
-        <span class="stack-group-label">form &amp; validasyon</span>
-        <ul class="tag-list">
-          <li>React Hook Form</li>
-          <li>Zod</li>
-        </ul>
-      </div>
-      <div class="stack-group">
-        <span class="stack-group-label">arayüz</span>
-        <ul class="tag-list">
-          <li>Material UI</li>
-        </ul>
-      </div>
-      <div class="stack-group">
-        <span class="stack-group-label">backend</span>
-        <ul class="tag-list">
-          <li>Java</li>
-          <li>Spring Boot</li>
-        </ul>
-      </div>
+      {groups.map((group) => (
+        <div class="stack-group">
+          <span class="stack-group-label">{t(group.label, lang)}</span>
+          <ul class="tag-list">
+            {group.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      ))}
     </div>
   </div>
 </div>

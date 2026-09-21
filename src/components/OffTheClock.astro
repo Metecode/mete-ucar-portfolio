@@ -4,17 +4,21 @@ import fishing from '../assets/off-the-clock/fishing.jpeg';
 import hiking from '../assets/off-the-clock/hiking.jpeg';
 import paddleboard from '../assets/off-the-clock/paddleboard.jpeg';
 
+import { getLangFromUrl, t } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+
 const photos = [
-  { src: fishing, alt: 'Gece balık tutarken' },
-  { src: hiking, alt: 'Dağ yürüyüşünde' },
-  { src: paddleboard, alt: 'Deniz üzerinde SUP yaparken' },
+  { src: fishing, alt: t('off.photo.fishing.alt', lang) },
+  { src: hiking, alt: t('off.photo.hiking.alt', lang) },
+  { src: paddleboard, alt: t('off.photo.paddleboard.alt', lang) },
 ];
 ---
 
 <section id="off-the-clock" class="section section-alt">
   <div class="container">
-    <h2 class="reveal-wipe">Mesai dışında</h2>
-    <p class="section-intro">Ekrandan uzaklaştığımda vaktimi nasıl geçirdiğim.</p>
+    <h2 class="reveal-wipe">{t('off.title', lang)}</h2>
+    <p class="section-intro">{t('off.intro', lang)}</p>
 
     <div class="photo-grid">
       {photos.map((photo) => (

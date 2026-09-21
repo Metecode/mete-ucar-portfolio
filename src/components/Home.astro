@@ -1,0 +1,35 @@
+---
+// Ana sayfanin bolum dizilimi. Hem TR koku (/) hem EN (/en/) bunu render eder;
+// tek fark dildir ve her bolum dili kendi basina Astro.url'den cozer. Boylece
+// yeni bir bolum eklendiginde iki sayfa birbirinden kayamaz.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from './Nav.astro';
+import Hero from './Hero.astro';
+import StackStrip from './StackStrip.astro';
+import About from './About.astro';
+import WhatIDo from './WhatIDo.astro';
+import Projects from './Projects.astro';
+import Marquee from './Marquee.astro';
+import Writing from './Writing.astro';
+import OffTheClock from './OffTheClock.astro';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
+---
+
+<BaseLayout>
+  <Nav />
+
+  <main id="main">
+    <Hero />
+    <StackStrip />
+    <About />
+    <WhatIDo />
+    <Projects />
+    <Marquee />
+    <Writing />
+    <OffTheClock />
+    <Contact />
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -1,36 +1,45 @@
 ---
 import { Image } from 'astro:assets';
 import heroPhoto from '../assets/hero.jpg';
+import { getLangFromUrl, t } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+
+const roleRows = [
+  { label: 'hero.card.role.label', value: 'hero.card.role.value' },
+  { label: 'hero.card.focus.label', value: 'hero.card.focus.value' },
+  { label: 'hero.card.stack.label', value: 'hero.card.stack.value' },
+] as const;
 ---
 
 <section id="hero" class="hero">
-  <span class="ghost-text" aria-hidden="true">FULL-STACK</span>
+  <span class="ghost-text" aria-hidden="true">{t('hero.ghost', lang)}</span>
   <div class="container hero-grid">
     <div class="hero-content">
       <h1>
-        <span class="line"><span>Karmaşık iş kurallarını,</span></span>
-        <span class="line"><span>güvenilir sistemlere</span></span>
-        <span class="line"><span>dönüştürüyorum.</span></span>
+        <span class="line"><span>{t('hero.line1', lang)}</span></span>
+        <span class="line"><span>{t('hero.line2', lang)}</span></span>
+        <span class="line"><span>{t('hero.line3', lang)}</span></span>
       </h1>
-      <p class="hero-sub hero-slide hero-slide-left" style="transition-delay:120ms;">32Bit bünyesinde kurumsal sigorta ürünleri geliştiren bir full-stack developer'ım; React ve TypeScript ile tip güvenli arayüzler, Java ve Spring Boot ile bunları besleyen servisler kuruyorum.</p>
+      <p class="hero-sub hero-slide hero-slide-left" style="transition-delay:120ms;">{t('hero.sub', lang)}</p>
       <div class="hero-actions hero-slide hero-slide-left" style="transition-delay:220ms;">
         <a href="#iletisim" class="btn btn-primary">
-          İletişime geç
+          {t('hero.cta.primary', lang)}
           <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a href="#ne-yapiyorum" class="btn btn-ghost">Ne yaptığımı gör</a>
+        <a href="#ne-yapiyorum" class="btn btn-ghost">{t('hero.cta.secondary', lang)}</a>
       </div>
       <dl class="role-card hero-slide hero-slide-right" style="transition-delay:320ms;">
-        <div class="role-row"><dt>role</dt><dd>"Full-stack developer"</dd></div>
-        <div class="role-row"><dt>focus</dt><dd>"Enterprise systems"</dd></div>
-        <div class="role-row"><dt>stack</dt><dd>React · TypeScript · Java · Spring Boot</dd></div>
+        {roleRows.map((row) => (
+          <div class="role-row"><dt>{t(row.label, lang)}</dt><dd>{t(row.value, lang)}</dd></div>
+        ))}
       </dl>
     </div>
 
     <div class="hero-photo">
       <div class="hero-photo-frame">
         <div class="hero-photo-layer hero-photo-color">
-          <Image src={heroPhoto} alt="Mete Uçar" />
+          <Image src={heroPhoto} alt={t('hero.photo.alt', lang)} />
         </div>
         <div class="hero-photo-layer hero-photo-bw">
           <Image src={heroPhoto} alt="" aria-hidden="true" />

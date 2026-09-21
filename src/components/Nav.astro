@@ -1,11 +1,42 @@
 ---
 import { Image } from 'astro:assets';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import logoMark from '../assets/logo-mark.png';
+import { getLangFromUrl, stripLangFromPath, t, languages, type Lang } from '../i18n/ui';
+
+interface Props {
+  /**
+   * Dil degistiricinin hedefleyecegi, dil onegi olmayan yol. Varsayilan olarak
+   * mevcut sayfanin yolu kullanilir; 404 gibi diger dilde karsiligi olmayan
+   * sayfalar "" gecerek ilgili dilin ana sayfasina yonlendirir.
+   */
+  localeSwitchPath?: string;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const path = stripLangFromPath(Astro.url);
+const { localeSwitchPath = path } = Astro.props;
 
 // Bolum capalari yalnizca ana sayfada var. 404 gibi baska bir sayfadayken duz
-// "#hakkimda" hicbir yere gitmez; onune "/" konarak once ana sayfaya donulur.
-// Ana sayfadayken prefix bos kalir, davranis eskisiyle birebir ayni.
-const home = Astro.url.pathname === '/' ? '' : '/';
+// "#hakkimda" hicbir yere gitmez; onune o dilin ana sayfasi konarak once oraya
+// donulur. Ana sayfadayken prefix bos kalir, davranis eskisiyle birebir ayni.
+const home = path === '' ? '' : getRelativeLocaleUrl(lang, '');
+
+// Bolum id'leri dile gore degismez: eski capa linkleri (meteucar.com/#hakkimda)
+// iki dilde de calismaya devam eder.
+const navItems = [
+  { id: 'hakkimda', key: 'nav.about' },
+  { id: 'ne-yapiyorum', key: 'nav.work' },
+  { id: 'projeler', key: 'nav.projects' },
+  { id: 'yazilar', key: 'nav.writing' },
+  { id: 'off-the-clock', key: 'nav.offTheClock' },
+] as const;
+
+const localeLinks = (Object.keys(languages) as Lang[]).map((locale) => ({
+  locale,
+  href: getRelativeLocaleUrl(locale, localeSwitchPath),
+  label: languages[locale],
+}));
 ---
 
 <header class="site-header" id="site-header">
@@ -15,26 +46,40 @@ const home = Astro.url.pathname === '/' ? '' : '/';
       Mete Uçar
     </a>
 
-    <nav class="nav-links" aria-label="Ana navigasyon" id="nav-links">
-      <a href={`${home}#hakkimda`}>Hakkımda</a>
-      <a href={`${home}#ne-yapiyorum`}>Ne yapıyorum</a>
-      <a href={`${home}#projeler`}>Projeler</a>
-      <a href={`${home}#yazilar`}>Yazılar</a>
-      <a href={`${home}#off-the-clock`}>Mesai dışında</a>
+    <nav class="nav-links" aria-label={t('nav.aria.main', lang)} id="nav-links">
+      {navItems.map((item) => (
+        <a href={`${home}#${item.id}`}>{t(item.key, lang)}</a>
+      ))}
     </nav>
 
     <div class="nav-actions">
-      <button class="theme-toggle" type="button" aria-label="Temayı değiştir">
+      <div class="lang-switch" role="group" aria-label={t('nav.aria.language', lang)}>
+        {localeLinks.map(({ locale, href, label }) => (
+          <a
+            href={href}
+            hreflang={locale}
+            lang={locale}
+            class:list={['lang-switch-link', { 'is-active': locale === lang }]}
+            aria-current={locale === lang ? 'true' : undefined}
+          >
+            <span aria-hidden="true">{locale.toUpperCase()}</span>
+            <span class="sr-only">{label}</span>
+          </a>
+        ))}
+      </div>
+
+      <button class="theme-toggle" type="button" aria-label={t('nav.aria.theme', lang)}>
         <svg class="icon icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
         <svg class="icon icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
       </button>
 
       <a href={`${home}#iletisim`} class="nav-cta-btn">
-        İletişim
+        {t('nav.contact', lang)}
         <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
 
-      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menüyü aç">
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label={t('nav.aria.menuOpen', lang)}
+        data-label-open={t('nav.aria.menuOpen', lang)} data-label-close={t('nav.aria.menuClose', lang)}>
         <span class="nav-toggle-bar"></span>
         <span class="nav-toggle-bar"></span>
         <span class="nav-toggle-bar"></span>
@@ -42,14 +87,12 @@ const home = Astro.url.pathname === '/' ? '' : '/';
     </div>
   </div>
 
-  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobil navigasyon" hidden>
+  <nav id="mobile-nav" class="mobile-nav" aria-label={t('nav.aria.mobile', lang)} hidden>
     <ul>
-      <li><a href={`${home}#hakkimda`}>Hakkımda</a></li>
-      <li><a href={`${home}#ne-yapiyorum`}>Ne yapıyorum</a></li>
-      <li><a href={`${home}#projeler`}>Projeler</a></li>
-      <li><a href={`${home}#yazilar`}>Yazılar</a></li>
-      <li><a href={`${home}#off-the-clock`}>Mesai dışında</a></li>
-      <li><a href={`${home}#iletisim`}>İletişim</a></li>
+      {navItems.map((item) => (
+        <li><a href={`${home}#${item.id}`}>{t(item.key, lang)}</a></li>
+      ))}
+      <li><a href={`${home}#iletisim`}>{t('nav.contact', lang)}</a></li>
     </ul>
   </nav>
 </header>
@@ -96,6 +139,20 @@ const home = Astro.url.pathname === '/' ? '' : '/';
   /* nav sag grup: tema butonu + CTA + hamburger.
      Tek flex ogesi olarak durur, boylece .nav-links ortada kalir. */
   .nav-actions{display:flex;align-items:center;gap:10px;}
+
+  /* dil degistirici: tema butonuyla ayni kapsul dilinde, iki kisa link.
+     Gorsel yukseklik 38px kalir; ::after ile 44px'lik dokunma alani eklenir
+     (WCAG 2.5.8) — kapsulun disina tasar ama tiklamayi engellemez. */
+  .lang-switch{display:flex;align-items:center;gap:2px;height:38px;padding:3px;
+    border:1px solid var(--border);background:color-mix(in srgb, var(--surface) 72%, transparent);
+    border-radius:999px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;}
+  .lang-switch-link{position:relative;display:inline-flex;align-items:center;justify-content:center;
+    min-width:32px;height:100%;padding-inline:9px;border-radius:999px;color:var(--text-muted);
+    transition:color var(--dur) var(--ease),background var(--dur) var(--ease);}
+  .lang-switch-link::after{content:"";position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);width:100%;height:44px;}
+  .lang-switch-link:hover{color:var(--text-primary);}
+  .lang-switch-link.is-active{color:var(--accent-on);background:var(--accent);}
 
   /* tema degistirme butonu.
      Gorsel cap 38px kalir; ::after ile 44x44'luk gorunmez dokunma alani eklenir
@@ -155,6 +212,12 @@ const home = Astro.url.pathname === '/' ? '' : '/';
 </style>
 
 <script>
+  // Hamburger'in acik/kapali aria-label'lari sunucuda sozlukten cozulup data-*
+  // ile aktarilir; boylece istemci script'i sozlugu import etmek zorunda kalmaz.
+  var navToggleEl = document.getElementById('nav-toggle');
+  var labelMenuOpen = navToggleEl.dataset.labelOpen;
+  var labelMenuClose = navToggleEl.dataset.labelClose;
+
   // header border on scroll -- histerezis: esigin tam ustunde gidip gelen
   // kucuk scroll oynamalari sinifi surekli acip kapatmasin
   var header = document.getElementById('site-header');
@@ -192,13 +255,13 @@ const home = Astro.url.pathname === '/' ? '' : '/';
   toggle.addEventListener('click', function(){
     var open = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!open));
-    toggle.setAttribute('aria-label', open ? 'Menüyü aç' : 'Menüyü kapat');
+    toggle.setAttribute('aria-label', open ? labelMenuOpen : labelMenuClose);
     if(open){ mobileNav.setAttribute('hidden',''); } else { mobileNav.removeAttribute('hidden'); }
   });
   mobileNav.addEventListener('click', function(e){
     if(e.target.tagName === 'A'){
       toggle.setAttribute('aria-expanded','false');
-      toggle.setAttribute('aria-label','Menüyü aç');
+      toggle.setAttribute('aria-label', labelMenuOpen);
       mobileNav.setAttribute('hidden','');
     }
   });

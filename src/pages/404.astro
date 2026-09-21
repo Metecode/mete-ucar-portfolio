@@ -2,28 +2,34 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLangFromUrl, t } from '../i18n/ui';
+
+// Statik barindirmada tek bir 404.html her yol icin servis edilir; dil bu yuzden
+// varsayilana (tr) duser ve sayfanin diger dilde birebir karsiligi yoktur:
+// hreflang uretilmez, dil degistirici de ilgili dilin ana sayfasina goturur.
+const lang = getLangFromUrl(Astro.url);
+const home = getRelativeLocaleUrl(lang, '');
 ---
 
 <BaseLayout
-  title="Sayfa bulunamadı — Mete Uçar"
-  description="Aradığınız sayfa bulunamadı. Ana sayfaya dönebilir veya doğrudan iletişime geçebilirsiniz."
+  title={t('meta.404.title', lang)}
+  description={t('meta.404.description', lang)}
+  alternates={false}
 >
-  <Nav />
+  <Nav localeSwitchPath="" />
 
   <main id="main" class="notfound">
     <div class="container notfound-inner">
-      <p class="notfound-code">404</p>
-      <h1>Bu sayfa yok.</h1>
-      <p class="notfound-text">
-        Adres yanlış yazılmış ya da sayfa taşınmış olabilir. Aşağıdan ana sayfaya
-        dönebilir veya doğrudan yazabilirsin.
-      </p>
+      <p class="notfound-code">{t('notfound.code', lang)}</p>
+      <h1>{t('notfound.title', lang)}</h1>
+      <p class="notfound-text">{t('notfound.text', lang)}</p>
       <div class="notfound-actions">
-        <a href="/" class="btn btn-primary">
-          Ana sayfaya dön
+        <a href={home} class="btn btn-primary">
+          {t('notfound.home', lang)}
           <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a href="/#iletisim" class="btn btn-ghost">İletişime geç</a>
+        <a href={`${home}#iletisim`} class="btn btn-ghost">{t('notfound.contact', lang)}</a>
       </div>
     </div>
   </main>

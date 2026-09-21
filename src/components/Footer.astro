@@ -1,16 +1,28 @@
 ---
-// bkz. Nav.astro: ana sayfa disinda capalar once ana sayfaya yonlendirilir
-const home = Astro.url.pathname === '/' ? '' : '/';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLangFromUrl, stripLangFromPath, t } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const path = stripLangFromPath(Astro.url);
+
+// bkz. Nav.astro: ana sayfa disinda capalar once o dilin ana sayfasina yonlendirilir
+const home = path === '' ? '' : getRelativeLocaleUrl(lang, '');
+
+const footerItems = [
+  { id: 'hakkimda', key: 'nav.about' },
+  { id: 'yazilar', key: 'nav.writing' },
+  { id: 'iletisim', key: 'nav.contact' },
+] as const;
 ---
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© 2026 Mete Uçar</p>
-    <nav aria-label="Footer navigasyon">
+    <p>{t('footer.copyright', lang)}</p>
+    <nav aria-label={t('footer.aria', lang)}>
       <ul>
-        <li><a href={`${home}#hakkimda`}>Hakkımda</a></li>
-        <li><a href={`${home}#yazilar`}>Yazılar</a></li>
-        <li><a href={`${home}#iletisim`}>İletişim</a></li>
+        {footerItems.map((item) => (
+          <li><a href={`${home}#${item.id}`}>{t(item.key, lang)}</a></li>
+        ))}
       </ul>
     </nav>
   </div>

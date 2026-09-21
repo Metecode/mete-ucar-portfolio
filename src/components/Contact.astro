@@ -1,8 +1,30 @@
+---
+import { getLangFromUrl, t } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+
+// Formun calisma aninda kullandigi metinler. Sunucuda cozulup data-i18n ile
+// aktarilir; boylece istemci script'i sozlugu import etmek zorunda kalmaz ve
+// iki dilin tamami JS paketine girmez. Kaynak yine tek yer: src/i18n/ui.ts.
+// {email} / {status} yer tutuculari istemcide doldurulur.
+const formStrings = {
+  sending: t('contact.form.sending', lang),
+  success: t('contact.form.success', lang),
+  timeout: t('contact.error.timeout', lang),
+  offline: t('contact.error.offline', lang),
+  invalid: t('contact.error.invalid', lang),
+  rateLimit: t('contact.error.rateLimit', lang),
+  server: t('contact.error.server', lang),
+  http: t('contact.error.http', lang),
+  network: t('contact.error.network', lang),
+};
+---
+
 <section id="iletisim" class="section reveal">
   <div class="container contact-grid">
     <div>
-      <h2>Birlikte çalışalım</h2>
-      <p>Kurumsal ölçekli bir ürün için full-stack desteğine mi ihtiyacınız var, yoksa sadece merhaba mı demek istiyorsunuz — yazın.</p>
+      <h2>{t('contact.title', lang)}</h2>
+      <p>{t('contact.intro', lang)}</p>
       <ul class="contact-links">
         <li><a href="mailto:i.meteucar@gmail.com">i.meteucar@gmail.com</a></li>
         <li><a href="https://www.linkedin.com/in/meteucar/" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -10,23 +32,30 @@
       </ul>
     </div>
 
-    <form class="contact-form" id="contact-form" action="https://formspree.io/f/moeveebz" method="POST" novalidate>
+    <form
+      class="contact-form"
+      id="contact-form"
+      action="https://formspree.io/f/moeveebz"
+      method="POST"
+      novalidate
+      data-i18n={JSON.stringify(formStrings)}
+    >
       <!-- honeypot: botlar doldurur, Formspree bu alan doluysa gönderimi eler -->
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true" />
       <div class="form-field">
-        <label for="name">İsim</label>
+        <label for="name">{t('contact.form.name', lang)}</label>
         <input type="text" id="name" name="name" autocomplete="name" required />
       </div>
       <div class="form-field">
-        <label for="email">E-posta</label>
+        <label for="email">{t('contact.form.email', lang)}</label>
         <input type="email" id="email" name="email" autocomplete="email" required />
       </div>
       <div class="form-field">
-        <label for="message">Mesaj</label>
+        <label for="message">{t('contact.form.message', lang)}</label>
         <textarea id="message" name="message" required></textarea>
       </div>
       <button type="submit" class="btn btn-primary">
-        Gönder
+        {t('contact.form.submit', lang)}
         <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
@@ -73,28 +102,27 @@
 
   var MAILTO = 'i.meteucar@gmail.com';
 
+  // aktif dilin metinleri sunucudan gelir (bkz. frontmatter'daki formStrings)
+  var TEXT = JSON.parse(form.dataset.i18n);
+
+  function fill(text, values){
+    return text.replace(/\{(\w+)\}/g, function(match, key){
+      return key in values ? String(values[key]) : match;
+    });
+  }
+
   // her hata ayni cumleye dusmesin: sebebe gore ne oldugunu ve ne yapilacagini soyle
   function errorMessage(err, timedOut){
-    if(timedOut){
-      return 'Gönderim 15 saniyede tamamlanmadı. Bağlantın yavaş olabilir — tekrar dene veya ' + MAILTO + ' adresine yaz.';
-    }
-    if(!navigator.onLine){
-      return 'İnternet bağlantısı yok gibi görünüyor. Bağlanınca “Gönder”e tekrar bas.';
-    }
     var s = err && typeof err.status === 'number' ? err.status : 0;
-    if(s === 422){
-      return 'Form alanlarından biri kabul edilmedi. E-posta adresini kontrol edip tekrar dene.';
-    }
-    if(s === 429){
-      return 'Çok fazla deneme yapıldı. Birkaç dakika sonra tekrar dene veya ' + MAILTO + ' adresine yaz.';
-    }
-    if(s >= 500){
-      return 'Form servisi şu an yanıt vermiyor (hata ' + s + '). Biraz sonra tekrar dene veya ' + MAILTO + ' adresine yaz.';
-    }
-    if(s > 0){
-      return 'Mesaj gönderilemedi (hata ' + s + '). ' + MAILTO + ' adresinden bana ulaşabilirsin.';
-    }
-    return 'Sunucuya ulaşılamadı. Bağlantını kontrol edip tekrar dene veya ' + MAILTO + ' adresine yaz.';
+    var text =
+      timedOut ? TEXT.timeout :
+      !navigator.onLine ? TEXT.offline :
+      s === 422 ? TEXT.invalid :
+      s === 429 ? TEXT.rateLimit :
+      s >= 500 ? TEXT.server :
+      s > 0 ? TEXT.http :
+      TEXT.network;
+    return fill(text, { email: MAILTO, status: s });
   }
 
   function setStatus(text, state){
@@ -116,7 +144,7 @@
 
     sending = true;
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Gönderiliyor...';
+    submitBtn.textContent = TEXT.sending;
     setStatus('', null);
 
     // istek asla asili kalmasin: 15sn sonra iptal edilir, buton tekrar aktiflesir
@@ -134,7 +162,7 @@
       if(!res.ok) throw res;
       form.reset();
       form.classList.add('is-sent');
-      setStatus('Mesajın iletildi, teşekkürler.', 'success');
+      setStatus(TEXT.success, 'success');
     })
     .catch(function(err){
       setStatus(errorMessage(err, timedOut), 'error');

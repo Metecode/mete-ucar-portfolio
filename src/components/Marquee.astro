@@ -1,10 +1,11 @@
 ---
-const uniqueItems = [
-  'Full-Stack Developer',
-  'Enterprise Systems',
-  'Tip Güvenli Formlar',
-  'React · TypeScript',
-];
+import { getLangFromUrl, t } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+
+const uniqueItems = (
+  ['marquee.item1', 'marquee.item2', 'marquee.item3', 'marquee.item4'] as const
+).map((key) => t(key, lang));
 
 // One copy of uniqueItems must render wider than the viewport, or the
 // -50% loop shows a blank gap on wide screens. 4x repeat covers ~3200px

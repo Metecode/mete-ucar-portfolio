@@ -1,32 +1,6 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import StackStrip from '../components/StackStrip.astro';
-import About from '../components/About.astro';
-import WhatIDo from '../components/WhatIDo.astro';
-import Projects from '../components/Projects.astro';
-import Marquee from '../components/Marquee.astro';
-import Writing from '../components/Writing.astro';
-import OffTheClock from '../components/OffTheClock.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
+// Turkce ana sayfa. prefixDefaultLocale:false oldugu icin kokte kalir: meteucar.com
+import Home from '../components/Home.astro';
 ---
 
-<BaseLayout>
-  <Nav />
-
-  <main id="main">
-    <Hero />
-    <StackStrip />
-    <About />
-    <WhatIDo />
-    <Projects />
-    <Marquee />
-    <Writing />
-    <OffTheClock />
-    <Contact />
-  </main>
-
-  <Footer />
-</BaseLayout>
+<Home />
