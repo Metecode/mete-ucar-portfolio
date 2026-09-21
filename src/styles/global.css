@@ -42,9 +42,31 @@ input,textarea{font:inherit;color:inherit;}
 
 .section-header-row{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px;}
 
+/* liste bos donduğunde grid'in yerine gecen aciklama -- bos ekran hic metinsiz kalmasin */
+.empty-state{margin-top:36px;padding:28px 24px;border:1px dashed var(--border-strong);
+  border-radius:var(--radius-md);color:var(--text-secondary);font-size:15px;line-height:1.65;}
+.empty-state a{color:var(--accent);border-bottom:1px solid currentColor;}
+
 .text-link{font-size:14px;color:var(--text-secondary);border-bottom:1px solid var(--border-strong);
   padding-bottom:2px;transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease);}
 .text-link:hover{color:var(--accent);border-color:var(--accent);}
+
+/* ---------- dokunmatik hedef boyutu ---------- */
+/* Alti cizili metin baglantilarinda alt cizginin yeri onemli oldugu icin gercek
+   yukseklik degil, gorunmez bir ::after ile dokunma alani 44px'e cikarilir
+   (WCAG 2.5.8). Sadece kaba isaretleyicide; farede gorsel hitbox aynen kalir. */
+@media (pointer: coarse){
+  .text-link,
+  .contact-links a,
+  .footer-inner nav a{position:relative;}
+  .text-link::after,
+  .contact-links a::after,
+  .footer-inner nav a::after{content:"";position:absolute;left:50%;top:50%;
+    transform:translate(-50%,-50%);width:100%;min-width:44px;height:44px;}
+  /* hedefler buyudugu icin komsulari birbirini yemesin diye araliklar acilir */
+  .contact-links{gap:22px;}
+  .footer-inner nav ul{gap:24px;}
+}
 
 /* ---------- reveal-on-scroll ---------- */
 .reveal{opacity:0;transform:translateY(14px);transition:opacity 620ms var(--ease-smooth),transform 620ms var(--ease-smooth);}
@@ -71,7 +93,8 @@ body::after{
   z-index:1000;}
 
 /* ---------- skip link ---------- */
-.skip-link{position:absolute;left:16px;top:-48px;background:var(--accent);color:var(--accent-on);
+.skip-link{position:absolute;left:16px;top:-60px;background:var(--accent);color:var(--accent-on);
+  display:inline-flex;align-items:center;min-height:44px;
   padding:10px 16px;border-radius:var(--radius-sm);font-size:14px;font-weight:500;z-index:200;
   transition:top var(--dur) var(--ease);}
 .skip-link:focus{top:16px;}

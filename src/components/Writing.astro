@@ -15,6 +15,14 @@ const articles = (await getCollection('articles')).sort(
       <a class="text-link" href="https://medium.com/@i.meteucar" target="_blank" rel="noopener">Medium'da tümünü gör →</a>
     </div>
 
+    {articles.length === 0 && (
+      <p class="empty-state">
+        Henüz burada yazı yok. Yeniler
+        <a href="https://medium.com/@i.meteucar" target="_blank" rel="noopener">Medium hesabımda</a>
+        yayımlanıyor.
+      </p>
+    )}
+
     <div class="article-grid">
       {articles.map((article) => (
         <a

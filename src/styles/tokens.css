@@ -14,6 +14,9 @@
   --accent:#7C86FF;
   --accent-hover:#939CFF;
   --accent-on:#171A4D;
+  --success:#4ADE80;
+  --danger:#FF8A80;
+  color-scheme:dark;
 }
 
 /* zemin gri-krem; yuzeyler zeminden ACIK, boylece kartlar hafif yukselmis durur */
@@ -29,6 +32,9 @@
   --accent:#5A63E8;
   --accent-hover:#4A53D4;
   --accent-on:#FFFFFF;
+  --success:#18794E;
+  --danger:#C62F32;
+  color-scheme:light;
 }
 
 /* temadan bagimsiz tokenler */

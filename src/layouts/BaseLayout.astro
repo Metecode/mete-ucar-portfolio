@@ -15,20 +15,35 @@ const {
 <!doctype html>
 <html lang="tr">
 <head>
-<!-- Tema, sayfa boyanmadan once uygulanir; boylece tema flash'i olmaz.
-     is:inline: Astro bu script'i bundle'lamasin, head'de senkron kalsin. -->
-<script is:inline>
-  const stored = localStorage.getItem('theme');
-  const theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', theme);
-</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- color-scheme: tarayici ilk boyamayi ve kendi UI'sini (kaydirma cubugu, form
+     kontrolleri, autofill) koyu temaya gore yapsin; yoksa koyu temada beyaz patlar. -->
+<meta name="color-scheme" content="dark light" />
+<meta name="theme-color" content="#0A0B0D" />
 <title>{title}</title>
 <meta name="description" content={description} />
+
+<!-- Tema, sayfa boyanmadan once uygulanir; boylece tema flash'i olmaz.
+     is:inline: Astro bu script'i bundle'lamasin, head'de senkron kalsin.
+     theme-color meta'sini guncelledigi icin o meta'dan SONRA gelir. -->
+<script is:inline>
+  // localStorage gizli sekmede / site verisi engelliyken firlatabilir;
+  // hata script'i durdurup data-theme'i hic yazmamasina yol acmasin diye sarmalanir
+  (function () {
+    var stored = null;
+    try { stored = localStorage.getItem('theme'); } catch (e) {}
+    var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#0A0B0D' : '#F4F4F2');
+  })();
+</script>
+
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
 </head>
 <body>
 

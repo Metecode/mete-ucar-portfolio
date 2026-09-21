@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Sayfa bulunamadı — Mete Uçar"
+  description="Aradığınız sayfa bulunamadı. Ana sayfaya dönebilir veya doğrudan iletişime geçebilirsiniz."
+>
+  <Nav />
+
+  <main id="main" class="notfound">
+    <div class="container notfound-inner">
+      <p class="notfound-code">404</p>
+      <h1>Bu sayfa yok.</h1>
+      <p class="notfound-text">
+        Adres yanlış yazılmış ya da sayfa taşınmış olabilir. Aşağıdan ana sayfaya
+        dönebilir veya doğrudan yazabilirsin.
+      </p>
+      <div class="notfound-actions">
+        <a href="/" class="btn btn-primary">
+          Ana sayfaya dön
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="/#iletisim" class="btn btn-ghost">İletişime geç</a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style is:global>
+  /* ---------- 404 ---------- */
+  .notfound{display:flex;align-items:center;min-height:calc(100dvh - var(--header-h) - 130px);
+    padding-block:clamp(64px,12vw,120px);}
+  .notfound-inner{max-width:52ch;}
+  .notfound-code{font-family:var(--font-mono);font-size:13px;color:var(--accent);letter-spacing:.08em;}
+  .notfound h1{font-size:clamp(32px,5.4vw,56px);letter-spacing:-.02em;margin-top:14px;}
+  .notfound-text{color:var(--text-secondary);margin-top:18px;font-size:16px;line-height:1.65;}
+  .notfound-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:32px;}
+</style>

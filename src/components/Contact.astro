@@ -57,9 +57,10 @@
   .contact-form .btn:disabled{opacity:.6;cursor:progress;}
   /* gonderim basarili olunca alanlar gizlenir, sadece durum mesaji kalir */
   .contact-form.is-sent > *:not(.form-status){display:none;}
-  .form-status{font-size:13.5px;color:var(--text-secondary);min-height:20px;}
-  .form-status.is-success{color:var(--accent);}
-  .form-status.is-error{color:var(--text-secondary);}
+  .form-status{font-size:13.5px;color:var(--text-secondary);min-height:20px;line-height:1.55;}
+  .form-status.is-success{color:var(--success);}
+  /* hata mesaji notr metinden ayirt edilebilsin diye kendi rengi ve sol seridi var */
+  .form-status.is-error{color:var(--danger);border-left:2px solid var(--danger);padding-left:10px;}
 </style>
 
 <script>
@@ -69,6 +70,32 @@
   var submitBtn = form.querySelector('button[type="submit"]');
   var submitMarkup = submitBtn.innerHTML;
   var sending = false;
+
+  var MAILTO = 'i.meteucar@gmail.com';
+
+  // her hata ayni cumleye dusmesin: sebebe gore ne oldugunu ve ne yapilacagini soyle
+  function errorMessage(err, timedOut){
+    if(timedOut){
+      return 'Gönderim 15 saniyede tamamlanmadı. Bağlantın yavaş olabilir — tekrar dene veya ' + MAILTO + ' adresine yaz.';
+    }
+    if(!navigator.onLine){
+      return 'İnternet bağlantısı yok gibi görünüyor. Bağlanınca “Gönder”e tekrar bas.';
+    }
+    var s = err && typeof err.status === 'number' ? err.status : 0;
+    if(s === 422){
+      return 'Form alanlarından biri kabul edilmedi. E-posta adresini kontrol edip tekrar dene.';
+    }
+    if(s === 429){
+      return 'Çok fazla deneme yapıldı. Birkaç dakika sonra tekrar dene veya ' + MAILTO + ' adresine yaz.';
+    }
+    if(s >= 500){
+      return 'Form servisi şu an yanıt vermiyor (hata ' + s + '). Biraz sonra tekrar dene veya ' + MAILTO + ' adresine yaz.';
+    }
+    if(s > 0){
+      return 'Mesaj gönderilemedi (hata ' + s + '). ' + MAILTO + ' adresinden bana ulaşabilirsin.';
+    }
+    return 'Sunucuya ulaşılamadı. Bağlantını kontrol edip tekrar dene veya ' + MAILTO + ' adresine yaz.';
+  }
 
   function setStatus(text, state){
     status.textContent = text;
@@ -92,21 +119,28 @@
     submitBtn.textContent = 'Gönderiliyor...';
     setStatus('', null);
 
+    // istek asla asili kalmasin: 15sn sonra iptal edilir, buton tekrar aktiflesir
+    var timedOut = false;
+    var controller = new AbortController();
+    var timer = setTimeout(function(){ timedOut = true; controller.abort(); }, 15000);
+
     fetch(form.action, {
       method: 'POST',
       body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Accept': 'application/json' },
+      signal: controller.signal
     })
     .then(function(res){
-      if(!res.ok) throw new Error(String(res.status));
+      if(!res.ok) throw res;
       form.reset();
       form.classList.add('is-sent');
       setStatus('Mesajın iletildi, teşekkürler.', 'success');
     })
-    .catch(function(){
-      setStatus('Bir sorun oluştu, doğrudan i.meteucar@gmail.com üzerinden yazabilirsin.', 'error');
+    .catch(function(err){
+      setStatus(errorMessage(err, timedOut), 'error');
     })
     .finally(function(){
+      clearTimeout(timer);
       sending = false;
       submitBtn.disabled = false;
       submitBtn.innerHTML = submitMarkup;
