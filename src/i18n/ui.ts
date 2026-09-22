@@ -47,13 +47,16 @@ const tr = {
   'hero.cta.primary': 'İletişime geç',
   'hero.cta.secondary': 'Ne yaptığımı gör',
   'hero.card.role.label': 'role',
-  'hero.card.role.value': '"Full-stack developer"',
+  'hero.card.role.value': 'Full-stack developer',
   'hero.card.focus.label': 'focus',
-  'hero.card.focus.value': '"Enterprise systems"',
+  'hero.card.focus.value': 'Enterprise systems',
   'hero.card.stack.label': 'stack',
   'hero.card.stack.value': 'React · TypeScript · Java · Spring Boot',
+  'hero.card.location.label': 'location',
+  'hero.card.location.value': 'Aydın, Türkiye · Remote',
   'hero.photo.alt': 'Mete Uçar',
   'hero.cv.aria': 'CV indir (PDF)',
+  'hero.identity.role': 'Full-stack Developer',
 
   // ---------- stack strip ----------
   'stack.core.label': 'core',
@@ -111,12 +114,6 @@ const tr = {
   'projects.link.demo': 'Demo',
   'projects.link.repo': 'Repo',
 
-  // ---------- marquee ----------
-  'marquee.item1': 'Full-Stack Developer',
-  'marquee.item2': 'Enterprise Systems',
-  'marquee.item3': 'Tip Güvenli Formlar',
-  'marquee.item4': 'React · TypeScript',
-
   // ---------- yazilar ----------
   'writing.title': 'Yazılar',
   'writing.all': "Medium'da tümünü gör →",
@@ -130,11 +127,18 @@ const tr = {
   'off.photo.fishing.alt': 'Gece balık tutarken',
   'off.photo.hiking.alt': 'Dağ yürüyüşünde',
   'off.photo.paddleboard.alt': 'Deniz üzerinde SUP yaparken',
+  'off.photo.fishing.caption': 'Balıkçılık',
+  'off.photo.hiking.caption': 'Dağ Yürüyüşleri & Zirve',
+  'off.photo.paddleboard.caption': 'Deniz & Su Sporları',
 
   // ---------- iletisim ----------
   'contact.title': 'Birlikte çalışalım',
   'contact.intro':
     'Kurumsal ölçekli bir ürün için full-stack desteğine mi ihtiyacınız var, yoksa sadece merhaba mı demek istiyorsunuz — yazın.',
+  'contact.info.title': 'İletişim Bilgileri',
+  'contact.info.email': 'e-posta',
+  'contact.info.linkedin': 'profesyonel profil',
+  'contact.info.github': 'kod depolarım',
   'contact.form.name': 'İsim',
   'contact.form.email': 'E-posta',
   'contact.form.message': 'Mesaj',
@@ -208,13 +212,16 @@ const en: Record<UIKey, string> = {
   'hero.cta.primary': 'Get in touch',
   'hero.cta.secondary': 'See what I do',
   'hero.card.role.label': 'role',
-  'hero.card.role.value': '"Full-stack developer"',
+  'hero.card.role.value': 'Full-stack developer',
   'hero.card.focus.label': 'focus',
-  'hero.card.focus.value': '"Enterprise systems"',
+  'hero.card.focus.value': 'Enterprise systems',
   'hero.card.stack.label': 'stack',
   'hero.card.stack.value': 'React · TypeScript · Java · Spring Boot',
+  'hero.card.location.label': 'location',
+  'hero.card.location.value': 'Aydın, Türkiye · Remote',
   'hero.photo.alt': 'Mete Uçar',
   'hero.cv.aria': 'Download CV (PDF)',
+  'hero.identity.role': 'Full-stack Developer',
 
   // ---------- stack strip ----------
   'stack.core.label': 'core',
@@ -272,12 +279,6 @@ const en: Record<UIKey, string> = {
   'projects.link.demo': 'Demo',
   'projects.link.repo': 'Repo',
 
-  // ---------- marquee ----------
-  'marquee.item1': 'Full-Stack Developer',
-  'marquee.item2': 'Enterprise Systems',
-  'marquee.item3': 'Type-Safe Forms',
-  'marquee.item4': 'React · TypeScript',
-
   // ---------- yazilar ----------
   'writing.title': 'Writing',
   'writing.all': 'See all on Medium →',
@@ -291,11 +292,18 @@ const en: Record<UIKey, string> = {
   'off.photo.fishing.alt': 'Night fishing',
   'off.photo.hiking.alt': 'On a mountain hike',
   'off.photo.paddleboard.alt': 'Paddleboarding at sea',
+  'off.photo.fishing.caption': 'Fishing & Coastline',
+  'off.photo.hiking.caption': 'Mountain Hikes & Summits',
+  'off.photo.paddleboard.caption': 'Sea & Water Sports',
 
   // ---------- iletisim ----------
   'contact.title': "Let's work together",
   'contact.intro':
     'Whether you need full-stack support for an enterprise-scale product or just want to say hello — drop me a line.',
+  'contact.info.title': 'Contact Info',
+  'contact.info.email': 'email',
+  'contact.info.linkedin': 'professional profile',
+  'contact.info.github': 'code repos',
   'contact.form.name': 'Name',
   'contact.form.email': 'Email',
   'contact.form.message': 'Message',

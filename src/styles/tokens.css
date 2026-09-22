@@ -76,8 +76,7 @@
 html.theme-transitions-enabled,
 html.theme-transitions-enabled body,
 html.theme-transitions-enabled .nav-links,
-html.theme-transitions-enabled .stack-strip,
-html.theme-transitions-enabled .marquee{
+html.theme-transitions-enabled .stack-strip{
   transition:background-color 400ms ease,border-color 400ms ease,color 400ms ease;
 }
 

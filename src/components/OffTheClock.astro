@@ -9,9 +9,9 @@ import { getLangFromUrl, t } from '../i18n/ui';
 const lang = getLangFromUrl(Astro.url);
 
 const photos = [
-  { src: fishing, alt: t('off.photo.fishing.alt', lang) },
-  { src: hiking, alt: t('off.photo.hiking.alt', lang) },
-  { src: paddleboard, alt: t('off.photo.paddleboard.alt', lang) },
+  { src: fishing, alt: t('off.photo.fishing.alt', lang), caption: t('off.photo.fishing.caption', lang) },
+  { src: hiking, alt: t('off.photo.hiking.alt', lang), caption: t('off.photo.hiking.caption', lang) },
+  { src: paddleboard, alt: t('off.photo.paddleboard.alt', lang), caption: t('off.photo.paddleboard.caption', lang) },
 ];
 ---
 
@@ -22,10 +22,11 @@ const photos = [
 
     <div class="photo-grid">
       {photos.map((photo) => (
-        <figure class="photo-placeholder">
-          <div class="photo-placeholder-inner">
-            <Image src={photo.src} alt={photo.alt} width={750} height={1000} format="webp" loading="lazy" />
+        <figure class="photo-card">
+          <div class="photo-media">
+            <Image src={photo.src} alt={photo.alt} width={750} height={1000} format="webp" loading="lazy" class="photo-img" />
           </div>
+          <figcaption class="photo-caption">{photo.caption}</figcaption>
         </figure>
       ))}
     </div>
@@ -34,15 +35,19 @@ const photos = [
 
 <style is:global>
   /* ---------- off the clock ---------- */
-  .photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px;align-items:start;}
+  .photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px;}
   @media (min-width:640px){ .photo-grid{grid-template-columns:repeat(3,1fr);} }
-  .photo-placeholder{aspect-ratio:4/5;background:var(--surface);border:1px solid var(--border-strong);
-    border-radius:var(--radius-md);overflow:hidden;margin:0;transition:border-color var(--dur) var(--ease);}
-  .photo-placeholder:hover{border-color:var(--accent);}
-  .photo-placeholder:nth-child(3n+2){aspect-ratio:1/1;}
-  .photo-placeholder:nth-child(3n+3){aspect-ratio:5/4;}
-  .photo-placeholder-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-    transition:transform 520ms var(--ease);}
-  .photo-placeholder:hover .photo-placeholder-inner{transform:scale(1.06);}
-  .photo-placeholder-inner img{width:100%;height:100%;object-fit:cover;display:block;}
+  .photo-card{display:flex;flex-direction:column;border:1px solid var(--border-strong);
+    border-radius:var(--radius-md);overflow:hidden;background:var(--surface);margin:0;
+    transition:border-color var(--dur) var(--ease);}
+  .photo-card:hover{border-color:var(--accent);}
+
+  .photo-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--surface);}
+
+  .photo-img{width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform 520ms var(--ease);transform-origin:center;}
+  .photo-card:hover .photo-img{transform:scale(1.06);}
+
+  .photo-caption{padding:10px 14px;font-family:var(--font-mono);
+    font-size:11.5px;color:var(--text-muted);border-top:1px solid var(--border);flex-shrink:0;}
 </style>

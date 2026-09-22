@@ -9,6 +9,7 @@ const roleRows = [
   { label: 'hero.card.role.label', value: 'hero.card.role.value' },
   { label: 'hero.card.focus.label', value: 'hero.card.focus.value' },
   { label: 'hero.card.stack.label', value: 'hero.card.stack.value' },
+  { label: 'hero.card.location.label', value: 'hero.card.location.value' },
 ] as const;
 ---
 
@@ -52,27 +53,31 @@ const roleRows = [
           <Image src={heroPhoto} alt="" aria-hidden="true" />
         </div>
       </div>
+      <div class="hero-identity-card">
+        <p class="hero-identity-name">Mete Uçar</p>
+        <p class="hero-identity-role">{t('hero.identity.role', lang)}</p>
+      </div>
     </div>
   </div>
 </section>
 
 <style is:global>
   /* ---------- hero ---------- */
-  .hero{position:relative;overflow:hidden;padding-block:clamp(80px,15vw,180px) clamp(64px,10vw,120px);}
+  .hero{position:relative;overflow:hidden;padding-block:clamp(28px,2.5vw,48px) clamp(64px,10vw,120px);}
   .hero::before{content:"";position:absolute;inset:-15%;pointer-events:none;z-index:0;
     background:radial-gradient(560px circle at var(--mx,50%) var(--my,15%),rgba(124,134,255,.16),transparent 62%);}
   .hero .container{position:relative;z-index:1;}
-  .hero h1{font-size:clamp(38px,6.4vw,72px);max-width:14ch;letter-spacing:-.02em;line-height:1.12;}
+  .hero h1{font-size:clamp(34px,5.4vw,58px);max-width:14ch;letter-spacing:-.02em;line-height:1.12;}
   .hero h1 .line{display:block;overflow:hidden;}
   .hero h1 .line span{display:block;transform:translateY(110%);transition:transform 700ms var(--ease);}
   .hero.is-ready h1 .line span{transform:translateY(0);}
   .hero h1 .line:nth-child(2) span{transition-delay:90ms;}
   .hero h1 .line:nth-child(3) span{transition-delay:180ms;}
-  .hero-sub{margin-top:22px;color:var(--text-secondary);max-width:56ch;font-size:17px;line-height:1.65;}
-  .hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:32px;}
+  .hero-sub{margin-top:14px;color:var(--text-secondary);max-width:56ch;font-size:17px;line-height:1.65;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;}
 
-  .hero-grid{display:grid;gap:48px;align-items:center;}
-  @media (min-width:900px){ .hero-grid{grid-template-columns:1.15fr 0.85fr;gap:56px;} }
+  .hero-grid{display:grid;gap:32px;align-items:start;}
+  @media (min-width:900px){ .hero-grid{grid-template-columns:1.15fr 0.85fr;gap:32px;} }
 
   .hero-slide{opacity:0;transition:opacity 700ms var(--ease-smooth),transform 700ms var(--ease-smooth);}
   .hero-slide-left{transform:translateX(-24px);}
@@ -93,13 +98,20 @@ const roleRows = [
     mask-image:radial-gradient(circle 110px at var(--px,50%) var(--py,42%),transparent 0,transparent 68px,black 128px);
     -webkit-mask-image:radial-gradient(circle 110px at var(--px,50%) var(--py,42%),transparent 0,transparent 68px,black 128px);}
 
-  .role-card{margin-top:44px;display:inline-block;background:var(--surface);border:1px solid var(--border);
-    border-radius:var(--radius-md);padding:18px 22px;font-family:var(--font-mono);font-size:13px;}
-  .role-row{display:flex;gap:18px;padding:3px 0;}
-  .role-row dt{color:var(--text-muted);width:52px;flex-shrink:0;}
+  .role-card{margin-top:20px;display:inline-block;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius-md);padding:14px 18px 16px;font-family:var(--font-mono);font-size:13px;}
+  .role-row{display:flex;gap:18px;padding:2px 0;}
+  .role-row dt{color:var(--text-muted);min-width:64px;flex-shrink:0;}
   .role-row dd{margin:0;color:var(--text-secondary);}
 
-  .cv-chip{display:inline-flex;align-items:center;gap:9px;margin-top:16px;
+  .hero-identity-card{display:flex;flex-direction:column;gap:2px;
+    margin-top:14px;padding:12px 16px;background:var(--surface);
+    border:1px solid var(--border);border-radius:var(--radius-md);
+    max-width:380px;margin-inline:auto;}
+  .hero-identity-name{font-size:13.5px;font-weight:500;color:var(--text-primary);}
+  .hero-identity-role{font-size:12px;color:var(--text-secondary);}
+
+  .cv-chip{display:inline-flex;align-items:center;gap:9px;margin-top:10px;
     padding:9px 16px;border:1px solid var(--border);border-radius:999px;
     background:var(--surface);font-family:var(--font-mono);font-size:12.5px;
     color:var(--text-secondary);transition:border-color var(--dur) var(--ease),
