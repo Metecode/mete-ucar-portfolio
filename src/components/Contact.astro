@@ -22,7 +22,7 @@ const formStrings = {
 
 <section id="iletisim" class="section reveal">
   <div class="container contact-grid">
-    <div>
+    <div class="contact-left">
       <h2>{t('contact.title', lang)}</h2>
       <p>{t('contact.intro', lang)}</p>
 
@@ -75,14 +75,21 @@ const formStrings = {
 
 <style is:global>
   /* ---------- contact ---------- */
-  .contact-grid{display:grid;gap:48px;}
+  .contact-grid{display:grid;gap:48px;align-items:start;}
   @media (min-width:860px){ .contact-grid{grid-template-columns:1fr 1.2fr;} }
   .contact-grid h2{font-size:clamp(26px,3.4vw,36px);margin-top:2px;}
   .contact-grid > div > p{color:var(--text-secondary);max-width:44ch;margin-top:16px;font-size:16px;line-height:1.65;}
-  .contact-info-card{margin-top:28px;background:var(--surface);border:1px solid var(--border);
+
+  /* kart metnin hemen altinda durur: sol kolonu forma esitleyip karti dibe yaslamak
+     fazla yuksekligi kartin ustunde bosluk olarak biriktiriyordu */
+  .contact-left{display:flex;flex-direction:column;}
+  .contact-info-card{margin-top:32px;background:var(--surface);border:1px solid var(--border);
     border-radius:var(--radius-md);padding:24px;}
-  .contact-info-title{font-size:15px;font-weight:500;color:var(--text-primary);}
-  .contact-info-list{margin-top:16px;display:flex;flex-direction:column;gap:14px;}
+  /* work-card dilinde sessiz bir "bolum etiketi": kucuk, mono, alti ayrac cizgili */
+  .contact-info-title{font-family:var(--font-mono);font-size:11px;font-weight:500;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--text-secondary);
+    margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .contact-info-list{margin-top:0;display:flex;flex-direction:column;gap:14px;}
   .contact-info-list dd{margin:0;}
   .contact-info-list dd a{font-size:15px;color:var(--text-primary);border-bottom:1px solid var(--border-strong);
     display:inline-block;width:fit-content;padding-bottom:2px;transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease);}
@@ -101,6 +108,8 @@ const formStrings = {
   /* gonderim basarili olunca alanlar gizlenir, sadece durum mesaji kalir */
   .contact-form.is-sent > *:not(.form-status){display:none;}
   .form-status{font-size:13.5px;color:var(--text-secondary);min-height:20px;line-height:1.55;}
+  /* bos durumda yer tutmasin; formun altinda oluk gibi bir bosluk birakiyordu */
+  .form-status:empty{min-height:0;}
   .form-status.is-success{color:var(--success);}
   /* hata mesaji notr metinden ayirt edilebilsin diye kendi rengi ve sol seridi var */
   .form-status.is-error{color:var(--danger);border-left:2px solid var(--danger);padding-left:10px;}
