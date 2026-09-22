@@ -53,6 +53,7 @@ const tr = {
   'hero.card.stack.label': 'stack',
   'hero.card.stack.value': 'React · TypeScript · Java · Spring Boot',
   'hero.photo.alt': 'Mete Uçar',
+  'hero.cv.aria': 'CV indir (PDF)',
 
   // ---------- stack strip ----------
   'stack.core.label': 'core',
@@ -213,6 +214,7 @@ const en: Record<UIKey, string> = {
   'hero.card.stack.label': 'stack',
   'hero.card.stack.value': 'React · TypeScript · Java · Spring Boot',
   'hero.photo.alt': 'Mete Uçar',
+  'hero.cv.aria': 'Download CV (PDF)',
 
   // ---------- stack strip ----------
   'stack.core.label': 'core',

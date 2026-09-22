@@ -52,6 +52,22 @@
   --ease-smooth:cubic-bezier(.16,1,.3,1);
 }
 
+/* ---------- cv chip animasyonlari ---------- */
+/* Buradaki :root'un disina, ornegin Hero.astro'nun scoped stiline
+   tasinirsa Astro scope selector'i ekler ve keyframe eslesmez (marquee'de
+   yasanan bug); bu yuzden global tokens.css'te tutuluyor. */
+@keyframes cv-bounce{
+  0%{transform:translateY(0);}
+  40%{transform:translateY(3px);}
+  55%{transform:translateY(-1px);}
+  100%{transform:translateY(0);}
+}
+
+@keyframes cv-pulse{
+  0%{box-shadow:0 0 0 0 rgba(124,134,255,.4);}
+  100%{box-shadow:0 0 0 8px rgba(124,134,255,0);}
+}
+
 /* ---------- tema gecis animasyonu ---------- */
 /* Sadece renk ozellikleri anime edilir; "all" kullanilmaz, yoksa magnetic buton,
    scroll reveal ve hover transformlari bozulur.
