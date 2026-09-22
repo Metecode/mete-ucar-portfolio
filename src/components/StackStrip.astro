@@ -35,10 +35,15 @@ const groups = [
   .stack-group-label{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10.5px;
     color:var(--text-secondary);text-transform:uppercase;letter-spacing:.09em;}
   .stack-group-label::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;}
-  @media (min-width:640px){
-    .stack-groups{grid-template-columns:repeat(3,1fr);gap:0;}
+  @media (min-width:640px) and (max-width:999.98px){
+    .stack-groups{grid-template-columns:repeat(2,1fr);gap:24px 0;}
     .stack-group{padding-inline:28px;}
-    .stack-group:first-child{padding-left:0;}
-    .stack-group:not(:first-child){border-left:1px solid var(--border);}
+    .stack-group:nth-child(odd){padding-left:0;}
+    .stack-group:nth-child(even){border-left:1px solid var(--border);}
+  }
+  @media (min-width:1000px){
+    .stack-groups{grid-template-columns:repeat(4,1fr);gap:0;}
+    .stack-group{padding-left:28px;border-left:1px solid var(--border);}
+    .stack-group:first-child{padding-left:0;border-left:none;}
   }
 </style>

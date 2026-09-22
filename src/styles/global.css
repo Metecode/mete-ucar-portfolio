@@ -23,6 +23,17 @@ input,textarea{font:inherit;color:inherit;}
     transition-duration:0.01ms !important;scroll-behavior:auto !important;}
 }
 
+/* ---------- sayfalar arasi native View Transitions ---------- */
+/* Sitede ic linkler hep #capa (ayni sayfa); gercek tam-sayfa navigasyon pratikte
+   sadece TR<->EN dil degistirici ve 404 gibi az sayida durumda oluyor. Bu yuzden
+   "navigation: auto" acmak dusuk riskli: kok icin varsayilan capraz-solma, dil
+   hapı gibi view-transition-name tasiyan elemanlar icinse gercek kayma/morph olur. */
+@media not (prefers-reduced-motion: reduce){
+  @view-transition {
+    navigation: auto;
+  }
+}
+
 /* ---------- layout helpers ---------- */
 .container{max-width:var(--container);margin-inline:auto;padding-inline:24px;}
 @media (min-width:768px){ .container{padding-inline:40px;} }

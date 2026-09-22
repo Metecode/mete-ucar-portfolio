@@ -1,10 +1,6 @@
 // Tum arayuz metinleri burada. Bilesenlerde metin HARDCODE EDILMEZ; t(key, lang)
 // ile buradan okunur. tr sozlugu kaynaktir: en, Record<UIKey, string> olarak
 // yazildigi icin bir anahtar unutulursa TypeScript derlemede uyarir.
-//
-// NOT: "[EN]" onekli degerler henuz cevrilmemis placeholder'lardir. Gercek
-// Ingilizce metinler geldikce bu onekler kaldirilacak. Onek tasimayan en
-// degerleri (teknoloji adlari, e-posta, mono etiketler) bilerek iki dilde aynidir.
 
 export const languages = {
   tr: 'Türkçe',
@@ -77,7 +73,7 @@ const tr = {
   'about.facts.field.label': 'alan',
   'about.facts.field.value': 'Kurumsal sigorta ürünleri',
   'about.facts.location.label': 'konum',
-  'about.facts.location.value': 'İstanbul, Türkiye',
+  'about.facts.location.value': 'Aydın, Türkiye · Remote',
 
   // ---------- ne yapiyorum ----------
   'work.ghost': 'WORK',
@@ -177,39 +173,39 @@ export type UIKey = keyof typeof tr;
 
 const en: Record<UIKey, string> = {
   // ---------- meta ----------
-  'meta.title': '[EN] Mete Uçar — Full-stack Developer',
+  'meta.title': 'Mete Uçar — Full-stack Developer',
   'meta.description':
-    '[EN] Mete Uçar — kurumsal sigorta ürünleri üzerine çalışan mid-level Full-stack developer. React, TypeScript, MUI, React Hook Form, Zod.',
-  'meta.404.title': '[EN] Sayfa bulunamadı — Mete Uçar',
+    'Mete Uçar — mid-level full-stack developer building enterprise insurance products. React, TypeScript, MUI, React Hook Form, Zod.',
+  'meta.404.title': 'Page not found — Mete Uçar',
   'meta.404.description':
-    '[EN] Aradığınız sayfa bulunamadı. Ana sayfaya dönebilir veya doğrudan iletişime geçebilirsiniz.',
+    "The page you're looking for doesn't exist. Head back home or get in touch directly.",
 
   // ---------- erisilebilirlik ----------
-  'a11y.skipLink': '[EN] İçeriğe geç',
+  'a11y.skipLink': 'Skip to content',
 
   // ---------- nav ----------
-  'nav.about': '[EN] Hakkımda',
-  'nav.work': '[EN] Ne yapıyorum',
-  'nav.projects': '[EN] Projeler',
-  'nav.writing': '[EN] Yazılar',
-  'nav.offTheClock': '[EN] Mesai dışında',
-  'nav.contact': '[EN] İletişim',
-  'nav.aria.main': '[EN] Ana navigasyon',
-  'nav.aria.mobile': '[EN] Mobil navigasyon',
-  'nav.aria.theme': '[EN] Temayı değiştir',
-  'nav.aria.menuOpen': '[EN] Menüyü aç',
-  'nav.aria.menuClose': '[EN] Menüyü kapat',
-  'nav.aria.language': '[EN] Dili değiştir',
+  'nav.about': 'About',
+  'nav.work': 'What I do',
+  'nav.projects': 'Projects',
+  'nav.writing': 'Writing',
+  'nav.offTheClock': 'Off the clock',
+  'nav.contact': 'Contact',
+  'nav.aria.main': 'Main navigation',
+  'nav.aria.mobile': 'Mobile navigation',
+  'nav.aria.theme': 'Toggle theme',
+  'nav.aria.menuOpen': 'Open menu',
+  'nav.aria.menuClose': 'Close menu',
+  'nav.aria.language': 'Change language',
 
   // ---------- hero ----------
   'hero.ghost': 'FULL-STACK',
-  'hero.line1': '[EN] Karmaşık iş kurallarını,',
-  'hero.line2': '[EN] güvenilir sistemlere',
-  'hero.line3': '[EN] dönüştürüyorum.',
+  'hero.line1': 'I turn complex',
+  'hero.line2': 'business rules into',
+  'hero.line3': 'systems you can trust.',
   'hero.sub':
-    "[EN] 32Bit bünyesinde kurumsal sigorta ürünleri geliştiren bir full-stack developer'ım; React ve TypeScript ile tip güvenli arayüzler, Java ve Spring Boot ile bunları besleyen servisler kuruyorum.",
-  'hero.cta.primary': '[EN] İletişime geç',
-  'hero.cta.secondary': '[EN] Ne yaptığımı gör',
+    'A full-stack developer building enterprise insurance products at 32Bit — type-safe interfaces with React and TypeScript, backed by services I build with Java and Spring Boot.',
+  'hero.cta.primary': 'Get in touch',
+  'hero.cta.secondary': 'See what I do',
   'hero.card.role.label': 'role',
   'hero.card.role.value': '"Full-stack developer"',
   'hero.card.focus.label': 'focus',
@@ -220,56 +216,56 @@ const en: Record<UIKey, string> = {
 
   // ---------- stack strip ----------
   'stack.core.label': 'core',
-  'stack.forms.label': '[EN] form & validasyon',
-  'stack.ui.label': '[EN] arayüz',
+  'stack.forms.label': 'form & validation',
+  'stack.ui.label': 'ui',
   'stack.backend.label': 'backend',
 
   // ---------- hakkimda ----------
-  'about.title': '[EN] Hakkımda',
+  'about.title': 'About',
   'about.p1':
-    "[EN] 32Bit'te full-stack developer olarak enterprise ölçekli sigorta ürünleri geliştiriyorum. İşimin çoğu, karmaşık iş kurallarını — prim hesaplamalarından çok adımlı başvuru akışlarına kadar — güvenilir, tip güvenli arayüzlere dönüştürmekten oluşuyor. React ve TypeScript'i temel alıyor, React Hook Form ve Zod ile form mimarilerini uçtan uca kurguluyor, Material UI üzerinde kurumsal tasarım sistemlerine sadık kalarak üretim yapıyorum.",
+    'I build enterprise-scale insurance products as a full-stack developer at 32Bit. Most of my work is about turning complex business rules — from premium calculations to multi-step application flows — into reliable, type-safe interfaces. I build on React and TypeScript, architect forms end to end with React Hook Form and Zod, and ship on top of Material UI while staying true to enterprise design systems.',
   'about.p2':
-    "[EN] Bir ürünü uçtan uca düşünmeyi seviyorum: React ve TypeScript ile arayüzü kurarken, Java ve Spring Boot ile arkasındaki servisleri de yazıyor, gerektiğinde tasarımı kendim kurguluyorum. Bu, bir işi 'sadece verilen tasarımı koda dökmek' olarak değil, problemin bütününü — veri modelinden son kullanıcının gördüğü ekrana kadar — sahiplenmek olarak görmemi sağlıyor. Beni motive eden şey; hatanın maliyetinin yüksek olduğu sistemlerde sade ve öngörülebilir çözümler kurabilmek.",
-  'about.facts.company.label': '[EN] şirket',
+    "I like thinking a product through end to end: building the interface with React and TypeScript while also writing the services behind it in Java and Spring Boot, and shaping the design myself when needed. It means I don't see the job as merely turning a given design into code, but as owning the whole problem — from the data model to the screen the user sees. What drives me is building simple, predictable solutions in systems where the cost of a mistake is high.",
+  'about.facts.company.label': 'company',
   'about.facts.company.value': '32Bit',
-  'about.facts.role.label': '[EN] rol',
+  'about.facts.role.label': 'role',
   'about.facts.role.value': 'Full-stack Developer',
-  'about.facts.field.label': '[EN] alan',
-  'about.facts.field.value': '[EN] Kurumsal sigorta ürünleri',
-  'about.facts.location.label': '[EN] konum',
-  'about.facts.location.value': '[EN] İstanbul, Türkiye',
+  'about.facts.field.label': 'field',
+  'about.facts.field.value': 'Enterprise insurance products',
+  'about.facts.location.label': 'location',
+  'about.facts.location.value': 'Aydın, Türkiye · Remote',
 
   // ---------- ne yapiyorum ----------
   'work.ghost': 'WORK',
-  'work.title': '[EN] Ne yapıyorum',
+  'work.title': 'What I do',
   'work.card1.file': 'policy-application.tsx',
-  'work.card1.title': '[EN] Çok adımlı poliçe başvuru akışları',
+  'work.card1.title': 'Multi-step policy application flows',
   'work.card1.desc':
-    '[EN] Koşullu dallanan, çok adımlı başvuru akışları kuruyorum — React Hook Form ve Zod discriminated union şemalarıyla; adım bazlı doğrulama, taslak kaydetme ve şemadan otomatik türetilen tipler işin standart parçası.',
+    'I build conditionally branching, multi-step application flows — with React Hook Form and Zod discriminated-union schemas. Step-level validation, draft saving, and types auto-derived from the schema are all part of the standard setup.',
   'work.card1.tag1': 'React Hook Form',
   'work.card1.tag2': 'Zod',
   'work.card1.tag3': 'TypeScript',
   'work.card2.file': 'premium-engine.ts',
-  'work.card2.title': '[EN] Gerçek zamanlı prim hesaplama ekranları',
+  'work.card2.title': 'Real-time premium calculation screens',
   'work.card2.desc':
-    '[EN] Karmaşık iş kurallarına bağlı, alan değiştikçe anlık güncellenen hesaplama arayüzleri kuruyorum — büyük veri setleriyle performanslı çalışan MUI tablo ve form kombinasyonlarıyla.',
+    'I build calculation interfaces driven by complex business rules that update instantly as fields change — with MUI table and form combinations that stay performant on large datasets.',
   'work.card2.tag1': 'React',
   'work.card2.tag2': 'MUI',
-  'work.card2.tag3': '[EN] Performans',
+  'work.card2.tag3': 'Performance',
   'work.card3.file': 'design-system.tsx',
-  'work.card3.title': '[EN] Kurumsal form bileşen kütüphaneleri',
+  'work.card3.title': 'Enterprise form component libraries',
   'work.card3.desc':
-    '[EN] Kurumsal marka kurallarına uygun, erişilebilirlik standartlarına uyumlu, farklı ekiplerin ortak kullandığı form bileşenleri kütüphaneleri kuruyorum — MUI temasını genişleterek.',
+    'I build shared form component libraries used across teams — aligned with corporate brand guidelines and accessibility standards — by extending the MUI theme.',
   'work.card3.tag1': 'MUI',
-  'work.card3.tag2': '[EN] Erişilebilirlik',
+  'work.card3.tag2': 'Accessibility',
   'work.card3.tag3': 'Design system',
 
   // ---------- projeler ----------
-  'projects.title': '[EN] Projeler',
+  'projects.title': 'Projects',
   'projects.intro':
-    '[EN] Kurumsal işin dışında uçtan uca kendi sorumluluğumda kurduğum projeler — gerçek link, gerçek kod.',
-  'projects.empty.text': '[EN] Şu an vitrinde proje yok. Yenileri hazırlanıyor — bu arada',
-  'projects.empty.link': '[EN] doğrudan yazabilirsin',
+    'Projects I built end to end, on my own — outside my day job. Real links, real code.',
+  'projects.empty.text': 'No projects on show right now. New ones are on the way — in the meantime,',
+  'projects.empty.link': 'reach out directly',
   'projects.preview.placeholder': '[ screenshot ]',
   'projects.link.demo': 'Demo',
   'projects.link.repo': 'Repo',
@@ -277,59 +273,59 @@ const en: Record<UIKey, string> = {
   // ---------- marquee ----------
   'marquee.item1': 'Full-Stack Developer',
   'marquee.item2': 'Enterprise Systems',
-  'marquee.item3': '[EN] Tip Güvenli Formlar',
+  'marquee.item3': 'Type-Safe Forms',
   'marquee.item4': 'React · TypeScript',
 
   // ---------- yazilar ----------
-  'writing.title': '[EN] Yazılar',
-  'writing.all': "[EN] Medium'da tümünü gör →",
-  'writing.empty.text': '[EN] Henüz burada yazı yok. Yeniler',
-  'writing.empty.link': '[EN] Medium hesabımda',
-  'writing.empty.suffix': '[EN] yayımlanıyor.',
+  'writing.title': 'Writing',
+  'writing.all': 'See all on Medium →',
+  'writing.empty.text': 'No posts here yet. New ones go up',
+  'writing.empty.link': 'on my Medium',
+  'writing.empty.suffix': '.',
 
   // ---------- mesai disinda ----------
-  'off.title': '[EN] Mesai dışında',
-  'off.intro': '[EN] Ekrandan uzaklaştığımda vaktimi nasıl geçirdiğim.',
-  'off.photo.fishing.alt': '[EN] Gece balık tutarken',
-  'off.photo.hiking.alt': '[EN] Dağ yürüyüşünde',
-  'off.photo.paddleboard.alt': '[EN] Deniz üzerinde SUP yaparken',
+  'off.title': 'Off the clock',
+  'off.intro': 'How I spend my time when I step away from the screen.',
+  'off.photo.fishing.alt': 'Night fishing',
+  'off.photo.hiking.alt': 'On a mountain hike',
+  'off.photo.paddleboard.alt': 'Paddleboarding at sea',
 
   // ---------- iletisim ----------
-  'contact.title': '[EN] Birlikte çalışalım',
+  'contact.title': "Let's work together",
   'contact.intro':
-    '[EN] Kurumsal ölçekli bir ürün için full-stack desteğine mi ihtiyacınız var, yoksa sadece merhaba mı demek istiyorsunuz — yazın.',
-  'contact.form.name': '[EN] İsim',
-  'contact.form.email': '[EN] E-posta',
-  'contact.form.message': '[EN] Mesaj',
-  'contact.form.submit': '[EN] Gönder',
-  'contact.form.sending': '[EN] Gönderiliyor...',
-  'contact.form.success': '[EN] Mesajın iletildi, teşekkürler.',
+    'Whether you need full-stack support for an enterprise-scale product or just want to say hello — drop me a line.',
+  'contact.form.name': 'Name',
+  'contact.form.email': 'Email',
+  'contact.form.message': 'Message',
+  'contact.form.submit': 'Send',
+  'contact.form.sending': 'Sending...',
+  'contact.form.success': 'Your message has been sent — thank you.',
   'contact.error.timeout':
-    '[EN] Gönderim 15 saniyede tamamlanmadı. Bağlantın yavaş olabilir — tekrar dene veya {email} adresine yaz.',
+    "The request didn't finish within 15 seconds. Your connection may be slow — try again or email {email}.",
   'contact.error.offline':
-    '[EN] İnternet bağlantısı yok gibi görünüyor. Bağlanınca “Gönder”e tekrar bas.',
+    'You appear to be offline. Once you reconnect, hit "Send" again.',
   'contact.error.invalid':
-    '[EN] Form alanlarından biri kabul edilmedi. E-posta adresini kontrol edip tekrar dene.',
+    'One of the form fields was rejected. Check your email address and try again.',
   'contact.error.rateLimit':
-    '[EN] Çok fazla deneme yapıldı. Birkaç dakika sonra tekrar dene veya {email} adresine yaz.',
+    'Too many attempts. Try again in a few minutes or email {email}.',
   'contact.error.server':
-    '[EN] Form servisi şu an yanıt vermiyor (hata {status}). Biraz sonra tekrar dene veya {email} adresine yaz.',
+    "The form service isn't responding right now (error {status}). Try again shortly or email {email}.",
   'contact.error.http':
-    '[EN] Mesaj gönderilemedi (hata {status}). {email} adresinden bana ulaşabilirsin.',
+    "Couldn't send your message (error {status}). You can reach me at {email}.",
   'contact.error.network':
-    '[EN] Sunucuya ulaşılamadı. Bağlantını kontrol edip tekrar dene veya {email} adresine yaz.',
+    "Couldn't reach the server. Check your connection and try again, or email {email}.",
 
   // ---------- footer ----------
   'footer.copyright': '© 2026 Mete Uçar',
-  'footer.aria': '[EN] Footer navigasyon',
+  'footer.aria': 'Footer navigation',
 
   // ---------- 404 ----------
   'notfound.code': '404',
-  'notfound.title': '[EN] Bu sayfa yok.',
+  'notfound.title': "This page doesn't exist.",
   'notfound.text':
-    '[EN] Adres yanlış yazılmış ya da sayfa taşınmış olabilir. Aşağıdan ana sayfaya dönebilir veya doğrudan yazabilirsin.',
-  'notfound.home': '[EN] Ana sayfaya dön',
-  'notfound.contact': '[EN] İletişime geç',
+    'The address may be mistyped, or the page may have moved. Head back home below, or reach out directly.',
+  'notfound.home': 'Back to home',
+  'notfound.contact': 'Get in touch',
 };
 
 export const ui = { tr, en } as const;
