@@ -58,7 +58,7 @@ const formStrings = {
       </div>
       <div class="form-field">
         <label for="email">{t('contact.form.email', lang)}</label>
-        <input type="email" id="email" name="email" autocomplete="email" required />
+        <input type="email" id="email" name="email" autocomplete="email" required spellcheck={false} />
       </div>
       <div class="form-field">
         <label for="message">{t('contact.form.message', lang)}</label>
@@ -95,7 +95,7 @@ const formStrings = {
     border-radius:var(--radius-sm);padding:12px 14px;font-size:16px;color:var(--text-primary);
     min-height:48px;transition:border-color var(--dur) var(--ease);}
   .form-field textarea{min-height:120px;resize:vertical;}
-  .form-field input:focus,.form-field textarea:focus{border-color:var(--accent);outline:none;}
+  .form-field input:focus,.form-field textarea:focus{border-color:var(--accent);}
   .contact-form .btn{align-self:flex-start;}
   .contact-form .btn:disabled{opacity:.6;cursor:progress;}
   /* gonderim basarili olunca alanlar gizlenir, sadece durum mesaji kalir */

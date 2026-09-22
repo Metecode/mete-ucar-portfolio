@@ -47,10 +47,10 @@ const roleRows = [
     <div class="hero-photo">
       <div class="hero-photo-frame">
         <div class="hero-photo-layer hero-photo-color">
-          <Image src={heroPhoto} alt={t('hero.photo.alt', lang)} />
+          <Image src={heroPhoto} alt={t('hero.photo.alt', lang)} loading="eager" fetchpriority="high" />
         </div>
         <div class="hero-photo-layer hero-photo-bw">
-          <Image src={heroPhoto} alt="" aria-hidden="true" />
+          <Image src={heroPhoto} alt="" aria-hidden="true" loading="eager" fetchpriority="high" />
         </div>
       </div>
       <div class="hero-identity-card">
