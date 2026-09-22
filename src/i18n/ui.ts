@@ -82,21 +82,21 @@ const tr = {
   // ---------- ne yapiyorum ----------
   'work.ghost': 'WORK',
   'work.title': 'Ne yapıyorum',
-  'work.card1.file': 'policy-application.tsx',
+  'work.card1.file': 'Form akışları',
   'work.card1.title': 'Çok adımlı poliçe başvuru akışları',
   'work.card1.desc':
     'Koşullu dallanan, çok adımlı başvuru akışları kuruyorum — React Hook Form ve Zod discriminated union şemalarıyla; adım bazlı doğrulama, taslak kaydetme ve şemadan otomatik türetilen tipler işin standart parçası.',
   'work.card1.tag1': 'React Hook Form',
   'work.card1.tag2': 'Zod',
   'work.card1.tag3': 'TypeScript',
-  'work.card2.file': 'premium-engine.ts',
+  'work.card2.file': 'Performans',
   'work.card2.title': 'Gerçek zamanlı prim hesaplama ekranları',
   'work.card2.desc':
     'Karmaşık iş kurallarına bağlı, alan değiştikçe anlık güncellenen hesaplama arayüzleri kuruyorum — büyük veri setleriyle performanslı çalışan MUI tablo ve form kombinasyonlarıyla.',
   'work.card2.tag1': 'React',
   'work.card2.tag2': 'MUI',
   'work.card2.tag3': 'Performans',
-  'work.card3.file': 'design-system.tsx',
+  'work.card3.file': 'Tasarım sistemi',
   'work.card3.title': 'Kurumsal form bileşen kütüphaneleri',
   'work.card3.desc':
     'Kurumsal marka kurallarına uygun, erişilebilirlik standartlarına uyumlu, farklı ekiplerin ortak kullandığı form bileşenleri kütüphaneleri kuruyorum — MUI temasını genişleterek.',
@@ -247,21 +247,21 @@ const en: Record<UIKey, string> = {
   // ---------- ne yapiyorum ----------
   'work.ghost': 'WORK',
   'work.title': 'What I do',
-  'work.card1.file': 'policy-application.tsx',
+  'work.card1.file': 'form flows',
   'work.card1.title': 'Multi-step policy application flows',
   'work.card1.desc':
     'I build conditionally branching, multi-step application flows — with React Hook Form and Zod discriminated-union schemas. Step-level validation, draft saving, and types auto-derived from the schema are all part of the standard setup.',
   'work.card1.tag1': 'React Hook Form',
   'work.card1.tag2': 'Zod',
   'work.card1.tag3': 'TypeScript',
-  'work.card2.file': 'premium-engine.ts',
+  'work.card2.file': 'performance',
   'work.card2.title': 'Real-time premium calculation screens',
   'work.card2.desc':
     'I build calculation interfaces driven by complex business rules that update instantly as fields change — with MUI table and form combinations that stay performant on large datasets.',
   'work.card2.tag1': 'React',
   'work.card2.tag2': 'MUI',
   'work.card2.tag3': 'Performance',
-  'work.card3.file': 'design-system.tsx',
+  'work.card3.file': 'design system',
   'work.card3.title': 'Enterprise form component libraries',
   'work.card3.desc':
     'I build shared form component libraries used across teams — aligned with corporate brand guidelines and accessibility standards — by extending the MUI theme.',
