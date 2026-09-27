@@ -35,7 +35,7 @@ const localeUrls = (Object.keys(languages) as Lang[]).map((locale) => ({
 <!-- color-scheme: tarayici ilk boyamayi ve kendi UI'sini (kaydirma cubugu, form
      kontrolleri, autofill) koyu temaya gore yapsin; yoksa koyu temada beyaz patlar. -->
 <meta name="color-scheme" content="dark light" />
-<meta name="theme-color" content="#0A0B0D" />
+<meta name="theme-color" content="#0C0D0D" />
 <title>{title}</title>
 <meta name="description" content={description} />
 
@@ -62,7 +62,7 @@ const localeUrls = (Object.keys(languages) as Lang[]).map((locale) => ({
     var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', theme);
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', theme === 'dark' ? '#0A0B0D' : '#F4F4F2');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#0C0D0D' : '#F2F3F1');
   })();
 </script>
 
@@ -80,10 +80,6 @@ const localeUrls = (Object.keys(languages) as Lang[]).map((locale) => ({
   <slot />
 
   <script>
-    // motion/pointer capability checks
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var fine = window.matchMedia('(pointer: fine)').matches;
-
     // scroll progress bar (rAF-throttled)
     var progressBar = document.getElementById('scroll-progress');
     var ticking = false;
@@ -110,10 +106,10 @@ const localeUrls = (Object.keys(languages) as Lang[]).map((locale) => ({
     });
 
     // stagger grid children, then reveal (single + staggered) via one observer
-    document.querySelectorAll('.work-grid, .project-grid, .article-grid, .photo-grid').forEach(function(grid){
+    document.querySelectorAll('.work-list, .project-grid, .article-grid, .photo-grid').forEach(function(grid){
       Array.prototype.forEach.call(grid.children, function(child, i){
         child.classList.add('reveal-item');
-        child.style.transitionDelay = (i * 70) + 'ms';
+        child.style.transitionDelay = (i * 50) + 'ms';
       });
     });
     var reveals = document.querySelectorAll('.reveal, .reveal-item, .reveal-wipe');
@@ -133,53 +129,6 @@ const localeUrls = (Object.keys(languages) as Lang[]).map((locale) => ({
       reveals.forEach(function(el){ io.observe(el); });
     } else {
       reveals.forEach(function(el){ el.classList.add('is-visible'); });
-    }
-
-    if(fine && !reduceMotion){
-      // cursor-tracked ambient glow: panel sections (about, stack strip)
-      document.querySelectorAll('.has-glow').forEach(function(el){
-        el.addEventListener('pointermove', function(e){
-          var r = el.getBoundingClientRect();
-          el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-          el.style.setProperty('--my', (e.clientY - r.top) + 'px');
-        });
-      });
-
-      // cursor-tracked spotlight: work/article cards (delegated)
-      document.addEventListener('pointermove', function(e){
-        var card = e.target.closest ? e.target.closest('.work-card, .article-card') : null;
-        if(!card) return;
-        var r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
-
-      // magnetic primary buttons (jitter-free: measure from untransformed rect)
-      document.querySelectorAll('.btn-primary').forEach(function(btn){
-        var raf = null;
-        btn.addEventListener('pointermove', function(e){
-          if(raf) return;
-          raf = requestAnimationFrame(function(){
-            raf = null;
-            // temporarily clear transform to read the button's true resting rect
-            var prev = btn.style.transform;
-            btn.style.transform = 'none';
-            var r = btn.getBoundingClientRect();
-            btn.style.transform = prev;
-            var relX = e.clientX - r.left - r.width / 2;
-            var relY = e.clientY - r.top - r.height / 2;
-            // clamp so the button never moves far enough to escape the cursor
-            var maxX = r.width * 0.12, maxY = r.height * 0.18;
-            var tx = Math.max(-maxX, Math.min(maxX, relX * 0.12));
-            var ty = Math.max(-maxY, Math.min(maxY, relY * 0.18));
-            btn.style.transform = 'translate(' + tx + 'px,' + ty + 'px)';
-          });
-        });
-        btn.addEventListener('pointerleave', function(){
-          if(raf){ cancelAnimationFrame(raf); raf = null; }
-          btn.style.transform = '';
-        });
-      });
     }
   </script>
 

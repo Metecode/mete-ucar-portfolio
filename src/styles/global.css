@@ -10,7 +10,7 @@ body{margin:0;background:var(--bg);color:var(--text-primary);font-family:var(--f
 h1,h2,h3{font-family:var(--font-display);font-weight:500;line-height:1.25;margin:0;color:var(--text-primary);}
 p{margin:0;}
 a{color:inherit;text-decoration:none;}
-ul{list-style:none;margin:0;padding:0;}
+ul,ol{list-style:none;margin:0;padding:0;}
 img{max-width:100%;display:block;}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
 input,textarea{font:inherit;color:inherit;}
@@ -40,14 +40,6 @@ input,textarea{font:inherit;color:inherit;}
 
 .section{padding-block:clamp(64px,9vw,120px);}
 .section-alt{background:var(--surface);}
-.has-ghost{position:relative;overflow:hidden;}
-.has-ghost .container{position:relative;z-index:1;}
-
-/* ---------- ambient cursor glow (for panel sections, not cards) ---------- */
-.has-glow{position:relative;overflow:hidden;}
-.has-glow::before{content:"";position:absolute;inset:-15%;pointer-events:none;z-index:0;
-  background:radial-gradient(520px circle at var(--mx,50%) var(--my,30%),rgba(124,134,255,.09),transparent 62%);}
-.has-glow > .container{position:relative;z-index:1;}
 
 .section-intro{color:var(--text-secondary);max-width:56ch;margin-top:14px;font-size:16px;}
 
@@ -93,12 +85,6 @@ body::after{
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ---------- decorative ghost typography ---------- */
-.ghost-text{position:absolute;top:52%;left:50%;transform:translate(-50%,-50%);
-  font-family:var(--font-mono);font-weight:500;font-size:clamp(110px,20vw,300px);
-  color:var(--text-primary);opacity:.035;letter-spacing:.02em;white-space:nowrap;
-  user-select:none;pointer-events:none;z-index:0;}
-
 /* ---------- scroll progress ---------- */
 .scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--accent);
   z-index:1000;}
@@ -123,34 +109,33 @@ body::after{
 .btn-primary{background:var(--accent);color:var(--accent-on);
   transition:background var(--dur) var(--ease),transform 120ms var(--ease-smooth);}
 .btn-primary:hover{background:var(--accent-hover);}
-.btn-ghost{border:1px solid var(--border-strong);color:var(--text-primary);}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
 .btn:active{transform:scale(.98);}
 .btn-arrow{transition:transform var(--dur) var(--ease);flex-shrink:0;}
 .btn-primary:hover .btn-arrow{transform:translateX(3px);}
 
-/* ---------- work cards (what i do + projects) ---------- */
-.work-card{position:relative;overflow:hidden;display:flex;flex-direction:column;
-  background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);
-  transition:border-color var(--dur) var(--ease),transform var(--dur) var(--ease);}
-.work-card::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
-  background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),rgba(124,134,255,.10),transparent 72%);
-  transition:opacity 320ms ease;}
-.work-card:hover::before{opacity:1;}
-.work-card:hover{border-color:var(--border-strong);transform:translateY(-3px);}
+/* ---------- form satiri etiketi ---------- */
+/* Gorsel referans (doldurulmus police formu) buradan tasinir: numarali alan +
+   mono etiket. Kartlarin ustundeki editor sekmesi taklidinin yerine gecer;
+   pencere kromu yok, sadece metin. */
+.field-label{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;
+  font-family:var(--font-mono);font-size:12px;color:var(--text-muted);}
+.field-no{color:var(--accent-link);font-variant-numeric:tabular-nums;}
 
-.work-card-tab{position:relative;z-index:1;display:flex;align-items:center;gap:9px;
-  padding:14px 20px;border-bottom:1px solid var(--border);}
-.work-card-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;}
-.work-card-filename{font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);}
+/* ---------- work cards (projects) ---------- */
+/* kartin kendisi tiklanmaz (linkler icinde); bu yuzden hover'da yukselmez,
+   yalnizca cercevesi koyulasir */
+.work-card{display:flex;flex-direction:column;
+  background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;
+  transition:border-color var(--dur) var(--ease);}
+.work-card:hover{border-color:var(--border-strong);}
 
-.work-card-body{position:relative;z-index:1;display:flex;flex-direction:column;flex:1;
-  padding:22px 24px 24px;}
+.work-card-body{display:flex;flex-direction:column;flex:1;padding:22px 24px 24px;}
+.work-card-body .field-label{margin-bottom:12px;}
 
 .work-card h3{font-size:17px;margin-bottom:10px;}
 .work-card p{color:var(--text-secondary);font-size:14.5px;line-height:1.65;}
 
-/* ---------- tag list (stack strip + cards) ---------- */
+/* ---------- tag list (stack strip + project cards) ---------- */
 .tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:18px;}
 .tag-list li{font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);background:var(--surface);
   border:1px solid var(--border);border-radius:20px;padding:6px 13px;}

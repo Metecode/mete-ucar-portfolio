@@ -5,13 +5,12 @@ const lang = getLangFromUrl(Astro.url);
 
 const facts = [
   { label: 'about.facts.company.label', value: 'about.facts.company.value' },
-  { label: 'about.facts.role.label', value: 'about.facts.role.value' },
   { label: 'about.facts.field.label', value: 'about.facts.field.value' },
   { label: 'about.facts.location.label', value: 'about.facts.location.value' },
 ] as const;
 ---
 
-<section id="hakkimda" class="section has-glow reveal">
+<section id="hakkimda" class="section reveal">
   <div class="container">
     <h2>{t('about.title', lang)}</h2>
     <div class="about-grid">
@@ -19,14 +18,15 @@ const facts = [
         <p>{t('about.p1', lang)}</p>
         <p>{t('about.p2', lang)}</p>
       </div>
-      <ul class="about-facts">
+      <!-- form satirlari: etiket solda, deger sagda, aralarinda cetvel cizgisi -->
+      <dl class="about-facts">
         {facts.map((fact) => (
-          <li>
-            <span class="fact-label">{t(fact.label, lang)}</span>
-            <span class="fact-value">{t(fact.value, lang)}</span>
-          </li>
+          <div class="fact-row">
+            <dt class="fact-label">{t(fact.label, lang)}</dt>
+            <dd class="fact-value">{t(fact.value, lang)}</dd>
+          </div>
         ))}
-      </ul>
+      </dl>
     </div>
   </div>
 </section>
@@ -36,10 +36,11 @@ const facts = [
   .about-grid{display:grid;gap:48px;margin-top:28px;}
   .about-text p{color:var(--text-secondary);max-width:62ch;font-size:16px;line-height:1.75;}
   .about-text p + p{margin-top:18px;}
-  .about-facts{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-content:start;}
-  .about-facts li{border-top:1px solid var(--border);padding-top:12px;}
-  .fact-label{display:block;font-family:var(--font-mono);font-size:12px;color:var(--text-muted);margin-bottom:4px;}
-  .fact-value{display:block;font-size:15px;color:var(--text-primary);}
+  .about-facts{margin:0;align-self:start;border-top:1px solid var(--border-strong);}
+  .fact-row{display:grid;grid-template-columns:minmax(72px,auto) 1fr;gap:16px;align-items:baseline;
+    padding:14px 0;border-bottom:1px solid var(--border);}
+  .fact-label{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);}
+  .fact-value{margin:0;font-size:15px;color:var(--text-primary);}
   @media (min-width:860px){
     .about-grid{grid-template-columns:1.4fr 1fr;}
   }

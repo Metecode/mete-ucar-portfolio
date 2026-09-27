@@ -38,25 +38,15 @@ const tr = {
   'nav.aria.language': 'Dili değiştir',
 
   // ---------- hero ----------
-  'hero.ghost': 'FULL-STACK',
   'hero.line1': 'Karmaşık iş kurallarını,',
   'hero.line2': 'güvenilir sistemlere',
   'hero.line3': 'dönüştürüyorum.',
   'hero.sub':
     "32Bit bünyesinde kurumsal sigorta ürünleri geliştiren bir full-stack developer'ım; React ve TypeScript ile tip güvenli arayüzler, Java ve Spring Boot ile bunları besleyen servisler kuruyorum.",
   'hero.cta.primary': 'İletişime geç',
-  'hero.cta.secondary': 'Ne yaptığımı gör',
-  'hero.card.role.label': 'role',
-  'hero.card.role.value': 'Full-stack developer',
-  'hero.card.focus.label': 'focus',
-  'hero.card.focus.value': 'Enterprise systems',
-  'hero.card.stack.label': 'stack',
-  'hero.card.stack.value': 'React · TypeScript · Java · Spring Boot',
-  'hero.card.location.label': 'location',
-  'hero.card.location.value': 'Aydın, Türkiye · Remote',
+  'hero.byline.role': 'Full-stack developer',
+  'hero.cv.label': 'CV indir (PDF)',
   'hero.photo.alt': 'Mete Uçar',
-  'hero.cv.aria': 'CV indir (PDF)',
-  'hero.identity.role': 'Full-stack Developer',
 
   // ---------- stack strip ----------
   'stack.core.label': 'core',
@@ -72,37 +62,25 @@ const tr = {
     "Bir ürünü uçtan uca düşünmeyi seviyorum: React ve TypeScript ile arayüzü kurarken, Java ve Spring Boot ile arkasındaki servisleri de yazıyor, gerektiğinde tasarımı kendim kurguluyorum. Bu, bir işi 'sadece verilen tasarımı koda dökmek' olarak değil, problemin bütününü — veri modelinden son kullanıcının gördüğü ekrana kadar — sahiplenmek olarak görmemi sağlıyor. Beni motive eden şey; hatanın maliyetinin yüksek olduğu sistemlerde sade ve öngörülebilir çözümler kurabilmek.",
   'about.facts.company.label': 'şirket',
   'about.facts.company.value': '32Bit',
-  'about.facts.role.label': 'rol',
-  'about.facts.role.value': 'Full-stack Developer',
   'about.facts.field.label': 'alan',
   'about.facts.field.value': 'Kurumsal sigorta ürünleri',
   'about.facts.location.label': 'konum',
   'about.facts.location.value': 'Aydın, Türkiye · Remote',
 
   // ---------- ne yapiyorum ----------
-  'work.ghost': 'WORK',
   'work.title': 'Ne yapıyorum',
   'work.card1.file': 'Form akışları',
   'work.card1.title': 'Çok adımlı poliçe başvuru akışları',
   'work.card1.desc':
     'Koşullu dallanan, çok adımlı başvuru akışları kuruyorum — React Hook Form ve Zod discriminated union şemalarıyla; adım bazlı doğrulama, taslak kaydetme ve şemadan otomatik türetilen tipler işin standart parçası.',
-  'work.card1.tag1': 'React Hook Form',
-  'work.card1.tag2': 'Zod',
-  'work.card1.tag3': 'TypeScript',
   'work.card2.file': 'Performans',
   'work.card2.title': 'Gerçek zamanlı prim hesaplama ekranları',
   'work.card2.desc':
     'Karmaşık iş kurallarına bağlı, alan değiştikçe anlık güncellenen hesaplama arayüzleri kuruyorum — büyük veri setleriyle performanslı çalışan MUI tablo ve form kombinasyonlarıyla.',
-  'work.card2.tag1': 'React',
-  'work.card2.tag2': 'MUI',
-  'work.card2.tag3': 'Performans',
   'work.card3.file': 'Tasarım sistemi',
   'work.card3.title': 'Kurumsal form bileşen kütüphaneleri',
   'work.card3.desc':
     'Kurumsal marka kurallarına uygun, erişilebilirlik standartlarına uyumlu, farklı ekiplerin ortak kullandığı form bileşenleri kütüphaneleri kuruyorum — MUI temasını genişleterek.',
-  'work.card3.tag1': 'MUI',
-  'work.card3.tag2': 'Erişilebilirlik',
-  'work.card3.tag3': 'Design system',
 
   // ---------- projeler ----------
   'projects.title': 'Projeler',
@@ -203,25 +181,15 @@ const en: Record<UIKey, string> = {
   'nav.aria.language': 'Change language',
 
   // ---------- hero ----------
-  'hero.ghost': 'FULL-STACK',
   'hero.line1': 'I turn complex',
   'hero.line2': 'business rules into',
   'hero.line3': 'systems you can trust.',
   'hero.sub':
     'A full-stack developer building enterprise insurance products at 32Bit — type-safe interfaces with React and TypeScript, backed by services I build with Java and Spring Boot.',
   'hero.cta.primary': 'Get in touch',
-  'hero.cta.secondary': 'See what I do',
-  'hero.card.role.label': 'role',
-  'hero.card.role.value': 'Full-stack developer',
-  'hero.card.focus.label': 'focus',
-  'hero.card.focus.value': 'Enterprise systems',
-  'hero.card.stack.label': 'stack',
-  'hero.card.stack.value': 'React · TypeScript · Java · Spring Boot',
-  'hero.card.location.label': 'location',
-  'hero.card.location.value': 'Aydın, Türkiye · Remote',
+  'hero.byline.role': 'Full-stack developer',
+  'hero.cv.label': 'Download CV (PDF)',
   'hero.photo.alt': 'Mete Uçar',
-  'hero.cv.aria': 'Download CV (PDF)',
-  'hero.identity.role': 'Full-stack Developer',
 
   // ---------- stack strip ----------
   'stack.core.label': 'core',
@@ -237,37 +205,25 @@ const en: Record<UIKey, string> = {
     "I like thinking a product through end to end: building the interface with React and TypeScript while also writing the services behind it in Java and Spring Boot, and shaping the design myself when needed. It means I don't see the job as merely turning a given design into code, but as owning the whole problem — from the data model to the screen the user sees. What drives me is building simple, predictable solutions in systems where the cost of a mistake is high.",
   'about.facts.company.label': 'company',
   'about.facts.company.value': '32Bit',
-  'about.facts.role.label': 'role',
-  'about.facts.role.value': 'Full-stack Developer',
   'about.facts.field.label': 'field',
   'about.facts.field.value': 'Enterprise insurance products',
   'about.facts.location.label': 'location',
   'about.facts.location.value': 'Aydın, Türkiye · Remote',
 
   // ---------- ne yapiyorum ----------
-  'work.ghost': 'WORK',
   'work.title': 'What I do',
   'work.card1.file': 'form flows',
   'work.card1.title': 'Multi-step policy application flows',
   'work.card1.desc':
     'I build conditionally branching, multi-step application flows — with React Hook Form and Zod discriminated-union schemas. Step-level validation, draft saving, and types auto-derived from the schema are all part of the standard setup.',
-  'work.card1.tag1': 'React Hook Form',
-  'work.card1.tag2': 'Zod',
-  'work.card1.tag3': 'TypeScript',
   'work.card2.file': 'performance',
   'work.card2.title': 'Real-time premium calculation screens',
   'work.card2.desc':
     'I build calculation interfaces driven by complex business rules that update instantly as fields change — with MUI table and form combinations that stay performant on large datasets.',
-  'work.card2.tag1': 'React',
-  'work.card2.tag2': 'MUI',
-  'work.card2.tag3': 'Performance',
   'work.card3.file': 'design system',
   'work.card3.title': 'Enterprise form component libraries',
   'work.card3.desc':
     'I build shared form component libraries used across teams — aligned with corporate brand guidelines and accessibility standards — by extending the MUI theme.',
-  'work.card3.tag1': 'MUI',
-  'work.card3.tag2': 'Accessibility',
-  'work.card3.tag3': 'Design system',
 
   // ---------- projeler ----------
   'projects.title': 'Projects',

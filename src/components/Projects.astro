@@ -23,13 +23,8 @@ const projects = (await getCollection('projects')).sort(
     )}
 
     <div class="project-grid">
-      {projects.map((project) => (
-        <article class="work-card project-card">
-          <div class="work-card-tab">
-            <span class="work-card-dot"></span>
-            <span class="work-card-filename">{project.data.filename}</span>
-            {project.data.badge && <span class="project-badge">{pick(project.data.badge, lang)}</span>}
-          </div>
+      {projects.map((project, i) => (
+        <article class:list={['work-card', 'project-card', { 'is-lead': i === 0 }]}>
           <div
             class:list={['project-preview', `is-${project.data.imageFit}`]}
             style={[
@@ -44,6 +39,11 @@ const projects = (await getCollection('projects')).sort(
             )}
           </div>
           <div class="work-card-body">
+            <p class="field-label">
+              <span class="field-no">{String(i + 1).padStart(2, '0')}</span>
+              <span>{project.data.filename}</span>
+              {project.data.badge && <span class="project-badge">{pick(project.data.badge, lang)}</span>}
+            </p>
             <h3>{pick(project.data.title, lang)}</h3>
             <p>{pick(project.data.description, lang)}</p>
             <ul class="tag-list">
@@ -76,16 +76,28 @@ const projects = (await getCollection('projects')).sort(
 
 <style is:global>
   /* ---------- projeler ---------- */
+  /* esit kart yok: ilk proje tam genislikte ve yatay (gorsel solda, metin sagda),
+     digerleri yarim genislikte ikili */
   .project-grid{display:grid;gap:20px;margin-top:40px;}
-  @media (min-width:768px){ .project-grid{grid-template-columns:repeat(3,1fr);} }
+  @media (min-width:768px){
+    .project-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .project-card.is-lead{grid-column:1 / -1;}
+  }
+  @media (min-width:960px){
+    .project-card.is-lead{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);}
+    .project-card.is-lead .project-preview{aspect-ratio:auto;min-height:100%;
+      border-bottom:none;border-right:1px solid var(--border);}
+    .project-card.is-lead .work-card-body{padding:36px 36px 32px;justify-content:center;}
+    .project-card.is-lead h3{font-size:24px;}
+    .project-card.is-lead p{font-size:15px;}
+  }
   .project-preview{aspect-ratio:16/10;background:var(--surface);border-bottom:1px solid var(--border);
     display:flex;align-items:center;justify-content:center;overflow:hidden;}
   .project-preview img{width:100%;height:100%;object-fit:cover;object-position:var(--img-pos,top center);display:block;}
   .project-preview.is-contain img{object-fit:contain;object-position:center;padding:26px;}
   .project-preview-label{font-family:var(--font-mono);font-size:11.5px;color:var(--text-muted);}
-  .project-badge{display:inline-block;font-family:var(--font-mono);font-size:9.5px;color:var(--text-muted);
-    border:1px solid var(--border);border-radius:20px;padding:3px 9px;margin-left:auto;flex-shrink:0;
-    text-transform:uppercase;letter-spacing:.06em;}
+  /* rozet degil, form satirinda bir not: kapsul yok, ayraclı duz metin */
+  .project-badge::before{content:"·";margin-right:10px;color:var(--border-strong);}
   /* margin-top, link'lere verilen min-height'in getirdigi ust bosluk kadar kisildi */
   .project-links{margin-top:5px;display:flex;flex-wrap:wrap;align-items:center;gap:0 18px;}
   /* min-height:44px -> dokunma hedefi (WCAG 2.5.8); gorsel yukseklik metin kadar kalir */

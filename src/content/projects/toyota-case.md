@@ -16,6 +16,7 @@ badge:
   tr: "vaka çalışması"
   en: "case study"
 image: "../../assets/projects/toyota-case.png"
-imageFit: "contain"
+# hata giris ekrani (tarayici kromu ve sag kenar cubugu kirpildi)
+imagePosition: "center"
 order: 1
 ---
