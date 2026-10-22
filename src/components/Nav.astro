@@ -123,7 +123,7 @@ const localeLinks = (Object.keys(languages) as Lang[]).map((locale) => ({
 
   /* pill capsule */
   .nav-links{display:none;align-items:center;gap:4px;font-size:13.5px;color:var(--text-secondary);
-    border:1px solid var(--border);background:color-mix(in srgb, var(--surface) 72%, transparent);
+    border:1px solid var(--border);background:var(--surface);
     border-radius:999px;padding:6px;}
   .nav-links a{position:relative;padding:8px 15px;border-radius:999px;opacity:0;transform:translateY(-10px);
     transition:color var(--dur) var(--ease),background var(--dur) var(--ease),
@@ -149,7 +149,7 @@ const localeLinks = (Object.keys(languages) as Lang[]).map((locale) => ({
      Gorsel yukseklik 38px kalir; ::after ile 44px'lik dokunma alani eklenir
      (WCAG 2.5.8) — kapsulun disina tasar ama tiklamayi engellemez. */
   .lang-switch{position:relative;display:flex;align-items:center;gap:2px;height:38px;padding:3px;
-    border:1px solid var(--border);background:color-mix(in srgb, var(--surface) 72%, transparent);
+    border:1px solid var(--border);background:var(--surface);
     border-radius:999px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;}
   /* aktif dili gosteren kayar "hap": TR/EN arasinda ayri bir arkaplan yerine tek
      bir elemani kaydirarak geciyor. Ayni sayfada JS yok; gecis dil linkine tiklayip
@@ -163,11 +163,12 @@ const localeLinks = (Object.keys(languages) as Lang[]).map((locale) => ({
   .lang-switch-thumb.is-en{transform:translateX(calc(100% + 2px));}
   .lang-switch-link{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
     min-width:32px;height:100%;padding-inline:9px;border-radius:999px;color:var(--text-muted);
-    transition:color var(--dur) var(--ease);}
+    transition:color var(--dur) var(--ease),scale 100ms ease-out;}
   .lang-switch-link::after{content:"";position:absolute;top:50%;left:50%;
     transform:translate(-50%,-50%);width:100%;height:44px;}
   .lang-switch-link:hover{color:var(--text-primary);}
   .lang-switch-link.is-active{color:var(--accent-on);}
+  .lang-switch-link:active{scale:.92;}
 
   /* tema degistirme butonu.
      Gorsel cap 38px kalir; ::after ile 44x44'luk gorunmez dokunma alani eklenir
@@ -177,10 +178,11 @@ const localeLinks = (Object.keys(languages) as Lang[]).map((locale) => ({
   .theme-toggle{position:relative;
     display:inline-flex;align-items:center;justify-content:center;
     width:38px;height:38px;flex:none;border-radius:999px;color:var(--text-secondary);
-    border:1px solid var(--border);background:color-mix(in srgb, var(--surface) 72%, transparent);
+    border:1px solid var(--border);background:var(--surface);
     transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease),
-    background var(--dur) var(--ease);}
+    background var(--dur) var(--ease),scale 100ms ease-out;}
   .theme-toggle:hover{color:var(--text-primary);border-color:var(--accent);}
+  .theme-toggle:active{scale:.9;}
 
   /* iki ikon da her zaman DOM'da ve boyalı; display yerine transform/opacity ile
      degisirler ki gecis anime olabilsin. Ust uste, buton icinde ortalanmis. */
@@ -197,16 +199,18 @@ const localeLinks = (Object.keys(languages) as Lang[]).map((locale) => ({
   /* nav CTA button */
   .nav-cta-btn{display:none;align-items:center;gap:7px;height:38px;padding-inline:16px;
     background:var(--accent);color:var(--accent-on);border-radius:999px;font-size:13.5px;font-weight:500;
-    opacity:0;transform:translateY(-10px);
+    opacity:0;translate:0 -10px;
     transition:background var(--dur) var(--ease),opacity 560ms var(--ease-smooth) 300ms,
-    transform 560ms var(--ease-smooth) 300ms;}
-  body.is-ready .nav-cta-btn{opacity:1;transform:translateY(0);}
+    translate 560ms var(--ease-smooth) 300ms,scale 100ms ease-out;}
+  body.is-ready .nav-cta-btn{opacity:1;translate:0 0;}
   .nav-cta-btn:hover{background:var(--accent-hover);}
+  .nav-cta-btn:active{scale:.96;}
   .nav-cta-btn svg{transition:transform var(--dur) var(--ease);}
   .nav-cta-btn:hover svg{transform:translateX(3px);}
 
   .nav-toggle{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
-    align-items:center;}
+    align-items:center;transition:scale 100ms ease-out;}
+  .nav-toggle:active{scale:.9;}
   .nav-toggle-bar{width:20px;height:1.5px;background:var(--text-primary);transition:transform var(--dur) var(--ease),opacity var(--dur) var(--ease);}
   .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
   .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){opacity:0;}
@@ -219,8 +223,10 @@ const localeLinks = (Object.keys(languages) as Lang[]).map((locale) => ({
   }
 
   .mobile-nav{border-top:1px solid var(--border);background:var(--bg);
-    max-height:calc(100dvh - var(--header-h-sm));overflow-y:auto;}
+    max-height:calc(100dvh - var(--header-h-sm));overflow-y:auto;
+    opacity:0;translate:0 -8px;transition:opacity 220ms var(--ease-smooth),translate 220ms var(--ease-smooth);}
   .mobile-nav[hidden]{display:none;}
+  .mobile-nav.is-open{opacity:1;translate:0 0;}
   .mobile-nav ul{display:flex;flex-direction:column;padding:12px 24px 24px;}
   .mobile-nav a{display:block;padding:14px 0;font-size:16px;color:var(--text-secondary);border-bottom:1px solid var(--border);}
   .mobile-nav a:last-child{border-bottom:none;color:var(--accent);}
@@ -269,25 +275,36 @@ const localeLinks = (Object.keys(languages) as Lang[]).map((locale) => ({
     });
   }
 
-  // mobile nav toggle
+  // mobile nav toggle -- acilis/kapanis "hidden" ile degil kisa bir opacity/translate
+  // gecisiyle oluyor; kapanista gecis bitene kadar "hidden" eklenmiyor ki transition kesilmesin
   var toggle = document.getElementById('nav-toggle');
   var mobileNav = document.getElementById('mobile-nav');
+  var mobileNavCloseTimer = null;
+  function openMobileNav(){
+    clearTimeout(mobileNavCloseTimer);
+    mobileNav.removeAttribute('hidden');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', labelMenuClose);
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ mobileNav.classList.add('is-open'); });
+    });
+  }
+  function closeMobileNav(){
+    mobileNav.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', labelMenuOpen);
+    mobileNavCloseTimer = setTimeout(function(){ mobileNav.setAttribute('hidden',''); }, 220);
+  }
   toggle.addEventListener('click', function(){
     var open = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!open));
-    toggle.setAttribute('aria-label', open ? labelMenuOpen : labelMenuClose);
-    if(open){ mobileNav.setAttribute('hidden',''); } else { mobileNav.removeAttribute('hidden'); }
+    if(open){ closeMobileNav(); } else { openMobileNav(); }
   });
   mobileNav.addEventListener('click', function(e){
-    if(e.target.tagName === 'A'){
-      toggle.setAttribute('aria-expanded','false');
-      toggle.setAttribute('aria-label', labelMenuOpen);
-      mobileNav.setAttribute('hidden','');
-    }
+    if(e.target.tagName === 'A'){ closeMobileNav(); }
   });
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true'){
-      toggle.click();
+      closeMobileNav();
       toggle.focus();
     }
   });
